@@ -1,0 +1,112 @@
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Perspective.Input;
+
+namespace Perspective
+{
+    public class Interactor : MonoBehaviour
+    {
+        [Header("Dependencies")]
+        [SerializeField] InputReader _inputReader;
+        [SerializeField] InteractionEvent _interactionEvent;
+        private readonly List<IInteractable> _potentialInteractions = new List<IInteractable>();
+        private IInteractable _closestInteractable;
+        private void OnEnable()
+        {
+            if (_inputReader != null)
+            {
+                _inputReader.InteractEvent += OnInteractionButtonPress;
+            }
+        }
+        private void OnDisable()
+        {
+            if (_inputReader != null)
+            {
+                _inputReader.InteractEvent -= OnInteractionButtonPress;
+            }
+        }
+
+        private void Update()
+        {
+            FindClosestInteractable();
+            UpdateInteractionEvent();
+        }
+        public void OnTriggerChangeDetected(bool entered, IInteractable interactable)
+        {
+            if (entered)
+            {
+                AddPotentialInteraction(interactable);
+            }
+            else
+            {
+                RemovePotentialInteraction(interactable);
+            }
+        }
+
+        private void FindClosestInteractable()
+        {
+            _potentialInteractions.RemoveAll(item => item == null || !(item as MonoBehaviour));
+
+            IInteractable previouslyClosest = _closestInteractable;
+            _closestInteractable = null;
+            float closestDistance = float.MaxValue;
+
+            foreach (var potential in _potentialInteractions)
+            {
+                if (!potential.IsInteractable)
+                {
+                    continue;
+                }
+
+                var monoBehaviour = potential as MonoBehaviour;
+                if (monoBehaviour == null) continue;
+
+                float distance = Vector3.Distance(transform.position, monoBehaviour.transform.position);
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    _closestInteractable = potential;
+                }
+            }
+        }
+
+        private void UpdateInteractionEvent()
+        {
+            if (_closestInteractable == null) {
+                _interactionEvent.RaiseEvent(false, "");
+                return;
+            }
+            _interactionEvent.RaiseEvent(true, _closestInteractable.InteractionPrompt);
+        }
+
+        private void AddPotentialInteraction(IInteractable interactable)
+        {
+            if (!_potentialInteractions.Contains(interactable))
+            {
+                _potentialInteractions.Add(interactable);
+            }
+        }
+
+        private void RemovePotentialInteraction(IInteractable interactable)
+        {
+            if (_potentialInteractions.Contains(interactable))
+            {
+                if (_closestInteractable == interactable)
+                {
+                    _closestInteractable = null;
+                }
+                _potentialInteractions.Remove(interactable);
+            }
+        }
+
+        public void OnInteractionButtonPress()
+        {
+            if (_closestInteractable != null && _closestInteractable.IsInteractable)
+            {
+                _closestInteractable.Interact();
+            }
+        }
+    }
+}
