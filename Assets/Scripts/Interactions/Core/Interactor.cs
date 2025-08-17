@@ -1,29 +1,30 @@
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+using Perspective.Event;
 using Perspective.Input;
+using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Perspective
+namespace Perspective.Interactions.Core
 {
     public class Interactor : MonoBehaviour
     {
         [Header("Dependencies")]
-        [SerializeField] InputReader _inputReader;
-        [SerializeField] InteractionEvent _interactionEvent;
+        [FormerlySerializedAs("_inputReader")] [SerializeField]  private InputReader inputReader;
+        [FormerlySerializedAs("_interactionEvent")] [SerializeField] private InteractionEvent interactionEvent;
         private readonly List<IInteractable> _potentialInteractions = new List<IInteractable>();
         private IInteractable _closestInteractable;
         private void OnEnable()
         {
-            if (_inputReader != null)
+            if (inputReader)
             {
-                _inputReader.InteractEvent += OnInteractionButtonPress;
+                inputReader.InteractEvent += OnInteractionButtonPress;
             }
         }
         private void OnDisable()
         {
-            if (_inputReader != null)
+            if (inputReader)
             {
-                _inputReader.InteractEvent -= OnInteractionButtonPress;
+                inputReader.InteractEvent -= OnInteractionButtonPress;
             }
         }
 
@@ -48,7 +49,6 @@ namespace Perspective
         {
             _potentialInteractions.RemoveAll(item => item == null || !(item as MonoBehaviour));
 
-            IInteractable previouslyClosest = _closestInteractable;
             _closestInteractable = null;
             float closestDistance = float.MaxValue;
 
@@ -60,7 +60,7 @@ namespace Perspective
                 }
 
                 var monoBehaviour = potential as MonoBehaviour;
-                if (monoBehaviour == null) continue;
+                if (!monoBehaviour) continue;
 
                 float distance = Vector3.Distance(transform.position, monoBehaviour.transform.position);
 
@@ -75,10 +75,10 @@ namespace Perspective
         private void UpdateInteractionEvent()
         {
             if (_closestInteractable == null) {
-                _interactionEvent.RaiseEvent(false, "");
+                interactionEvent.RaiseEvent(false, "");
                 return;
             }
-            _interactionEvent.RaiseEvent(true, _closestInteractable.InteractionPrompt);
+            interactionEvent.RaiseEvent(true, _closestInteractable.InteractionPrompt);
         }
 
         private void AddPotentialInteraction(IInteractable interactable)
@@ -101,9 +101,9 @@ namespace Perspective
             }
         }
 
-        public void OnInteractionButtonPress()
+        private void OnInteractionButtonPress()
         {
-            if (_closestInteractable != null && _closestInteractable.IsInteractable)
+            if (_closestInteractable is { IsInteractable: true })
             {
                 _closestInteractable.Interact();
             }

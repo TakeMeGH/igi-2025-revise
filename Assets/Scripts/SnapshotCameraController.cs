@@ -1,87 +1,77 @@
 using System.Collections.Generic;
 using Perspective.Input;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Perspective
 {
     public class SnapshotCameraController : MonoBehaviour
     {
-        [Header("Settings")]
-        [SerializeField] private bool isEnabled;
+        [Header("Settings")] [SerializeField] private bool isEnabled;
 
-        [Header("Input")]
-        [SerializeField] private InputReader inputReader;
+        [Header("Input")] [SerializeField] private InputReader inputReader;
 
-        [Header("Cameras")]
-        [SerializeField] private Camera mainCamera;
+        [Header("Cameras")] [SerializeField] private Camera mainCamera;
         [SerializeField] private Camera snapshotCamera;
+        private bool _isUsingCamera;
 
-        [Header("Snapshot Output")]
-        [SerializeField] private RenderTexture renderTexture;
+        [Header("Snapshot Output")] [SerializeField]
+        private RenderTexture renderTexture;
+
         [SerializeField] private RawImage snapshotDisplay;
         [SerializeField] private RectTransform frameUI;
         [SerializeField] private GameObject historyImageGrid;
-        private List<Texture2D> _snapshotHistory = new List<Texture2D>();
+        private readonly List<Texture2D> _snapshotHistory = new();
 
 
-        [Header("Detection")]
-        [SerializeField] private LayerMask eventLayer;
+        [Header("Detection")] [SerializeField] private LayerMask eventLayer;
 
         private void OnEnable()
         {
             inputReader.CameraEvent += UseCamera;
+            inputReader.SnapshotEvent += TakeSnapshot;
         }
 
         private void OnDisable()
         {
             inputReader.CameraEvent -= UseCamera;
+            inputReader.SnapshotEvent -= TakeSnapshot;
         }
-        void Start()
+
+        private void Start()
         {
             SetCamera(isEnabled);
         }
-        void Update()
-        {   
-            // Get mouse position in world space
+
+        private void Update()
+        {
+            if (!_isUsingCamera) return;
             Vector3 mousePos = UnityEngine.Input.mousePosition;
             mousePos.z = 10f; // ← Distance from camera to world
             Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
 
-            transform.position = new Vector3(mainCamera.transform.position.x, 
+            transform.position = new Vector3(mainCamera.transform.position.x,
                 mainCamera.transform.position.y, mainCamera.transform.position.z);
             transform.LookAt(worldPos);
-
-            if (frameUI != null)
-            {
-                frameUI.position = mousePos;
-            }
-
-            if (UnityEngine.Input.GetMouseButtonDown(0))
-            {
-                TakeSnapshot();
-                CountObjectsInView();
-            }
         }
 
-        void SetCamera(bool enabled)
+        private void SetCamera(bool enableCamera)
         {
-            snapshotDisplay.enabled = enabled;
-            frameUI.GetComponent<Image>().enabled = enabled;
+            snapshotDisplay.enabled = enableCamera;
+            frameUI.GetComponent<Image>().enabled = enableCamera;
+            _isUsingCamera = enableCamera;
         }
 
-        void UseCamera()
+        private void UseCamera()
         {
             isEnabled = !isEnabled;
             SetCamera(isEnabled);
         }
 
-        void TakeSnapshot()
+        private void TakeSnapshot()
         {
-            if (renderTexture != null && 
+            if (!_isUsingCamera) return;
+            if (renderTexture &&
                 renderTexture.graphicsFormat != UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_SRGB)
             {
                 renderTexture.Release();
@@ -104,19 +94,20 @@ namespace Perspective
 
             // Show in UI
             snapshotDisplay.texture = snapshot;
-            
+
             _snapshotHistory.Add(snapshot);
-            
+
             historyImageGrid.transform.GetChild(_snapshotHistory.Count - 1).GetComponent<RawImage>().texture = snapshot;
 
             Debug.Log("📸 Snapshot taken!");
+            CountObjectsInView();
         }
-        
-        void CountObjectsInView()
-        {
-            int count = 0;
 
-            Collider[] hits = FindObjectsOfType<Collider>();
+        private void CountObjectsInView()
+        {
+            var count = 0;
+
+            Collider[] hits = FindObjectsByType<Collider>(FindObjectsSortMode.None);
 
             foreach (var hit in hits)
             {
@@ -124,7 +115,7 @@ namespace Perspective
                 Debug.Log(hit.gameObject.name);
                 Vector3 viewportPos = snapshotCamera.WorldToViewportPoint(hit.transform.position);
 
-                if (viewportPos.z > 0 && viewportPos.x >= 0 && viewportPos.x <= 1 && viewportPos.y >= 0 && viewportPos.y <= 1)
+                if (viewportPos is { z: > 0, x: >= 0 and <= 1, y: >= 0 and <= 1 })
                 {
                     count++;
                 }
@@ -132,6 +123,5 @@ namespace Perspective
 
             Debug.Log("📸 Objects in snapshot: " + count);
         }
-
     }
 }

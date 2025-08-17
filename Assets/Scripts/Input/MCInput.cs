@@ -127,6 +127,15 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Snapshot"",
+                    ""type"": ""Button"",
+                    ""id"": ""4db1f662-4d81-4de2-b36b-f1453c8762b5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -316,6 +325,17 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5136f02a-afcd-4bb4-9149-94eb8e317bea"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Snapshot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -395,6 +415,7 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Camera = m_Gameplay.FindAction("Camera", throwIfNotFound: true);
+        m_Gameplay_Snapshot = m_Gameplay.FindAction("Snapshot", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -482,6 +503,7 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Look;
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Camera;
+    private readonly InputAction m_Gameplay_Snapshot;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -509,6 +531,10 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Camera".
         /// </summary>
         public InputAction @Camera => m_Wrapper.m_Gameplay_Camera;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Snapshot".
+        /// </summary>
+        public InputAction @Snapshot => m_Wrapper.m_Gameplay_Snapshot;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -547,6 +573,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @Camera.started += instance.OnCamera;
             @Camera.performed += instance.OnCamera;
             @Camera.canceled += instance.OnCamera;
+            @Snapshot.started += instance.OnSnapshot;
+            @Snapshot.performed += instance.OnSnapshot;
+            @Snapshot.canceled += instance.OnSnapshot;
         }
 
         /// <summary>
@@ -570,6 +599,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @Camera.started -= instance.OnCamera;
             @Camera.performed -= instance.OnCamera;
             @Camera.canceled -= instance.OnCamera;
+            @Snapshot.started -= instance.OnSnapshot;
+            @Snapshot.performed -= instance.OnSnapshot;
+            @Snapshot.canceled -= instance.OnSnapshot;
         }
 
         /// <summary>
@@ -788,6 +820,13 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCamera(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Snapshot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSnapshot(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

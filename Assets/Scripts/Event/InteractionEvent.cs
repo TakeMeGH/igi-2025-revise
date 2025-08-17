@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Perspective
+namespace Perspective.Event
 {
     [CreateAssetMenu(fileName = "New Interaction Event", menuName = "Scriptable Objects/Events/Interaction Event")]
     public class InteractionEvent : ScriptableObject

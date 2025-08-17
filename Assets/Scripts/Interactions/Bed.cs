@@ -1,14 +1,16 @@
+using Perspective.Interactions.Core;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Perspective
+namespace Perspective.Interactions
 {
     public class Bed : MonoBehaviour, IInteractable
     {
-        [SerializeField] string _interactionMessage;
-        [SerializeField] bool _isInteractable;
-        public string InteractionPrompt => _interactionMessage;
+        [FormerlySerializedAs("_interactionMessage")] [SerializeField] private string interactionMessage;
+        [FormerlySerializedAs("_isInteractable")] [SerializeField] private bool isInteractable;
+        public string InteractionPrompt => interactionMessage;
 
-        public bool IsInteractable => _isInteractable;
+        public bool IsInteractable => isInteractable;
 
         public void Interact()
         {

@@ -1,4 +1,4 @@
-namespace Perspective
+namespace Perspective.Interactions.Core
 {
     public interface IInteractable
     {

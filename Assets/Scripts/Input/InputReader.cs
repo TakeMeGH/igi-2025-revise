@@ -13,6 +13,7 @@ namespace Perspective.Input
         public Action<Vector2> LookEvent;
         public Action InteractEvent;
         public Action CameraEvent;
+        public Action SnapshotEvent;
 
         #endregion
 
@@ -83,6 +84,14 @@ namespace Perspective.Input
             if (context.phase == InputActionPhase.Performed)
             {
                 CameraEvent?.Invoke();
+            }
+        }
+
+        public void OnSnapshot(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                SnapshotEvent?.Invoke();
             }
         }
 

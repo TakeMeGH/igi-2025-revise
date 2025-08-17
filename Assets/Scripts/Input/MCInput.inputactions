@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "MCInput",
     "maps": [
         {
@@ -36,6 +37,15 @@
                     "name": "Camera",
                     "type": "Button",
                     "id": "b549588c-5178-415d-b1f5-9fae0d1b62eb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Snapshot",
+                    "type": "Button",
+                    "id": "4db1f662-4d81-4de2-b36b-f1453c8762b5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -227,6 +237,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5136f02a-afcd-4bb4-9149-94eb8e317bea",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Snapshot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
