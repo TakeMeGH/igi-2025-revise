@@ -38,6 +38,7 @@ namespace Perspective.Character.NPC
         public float WalkSpeed => walkSpeed;
         [SerializeField] private float runSpeed = 4f;
         public float RunSpeed => runSpeed;
+        public int chaseIndex;
         private readonly Collider[] hitsAnotherNpc = new Collider[105];
 
         #endregion
@@ -61,6 +62,16 @@ namespace Perspective.Character.NPC
 
         #endregion
 
+        #region Brawler Attributes
+
+        [Header("Brawler Attributes")] [SerializeField] private float brawlerRange;
+        [SerializeField] private float brawlerAngle;
+        [SerializeField] private float nearToBrawlDistance;
+        public float NearToBrawlDistance => nearToBrawlDistance;
+        public bool MainFighter { get; private set; }
+        public bool isPunching;
+
+        #endregion
 
         #region State
 
@@ -69,6 +80,12 @@ namespace Perspective.Character.NPC
         public NpcConversationState NpcConversationState { get; private set; }
         public NpcPickPocketState NpcPickPocketState { get; private set; }
         public NpcYellState NpcYellState { get; private set; }
+        public NpcIntimidationState NpcIntimidationState { get; private set; }
+        public NpcFightState NpcFightState { get; private set; }
+
+        public NpcFleeState NpcFleeState { get; private set; }
+
+        public NpcChaseState NpcChaseState { get; private set; }
         #endregion
 
         private void OnDisable()
@@ -86,6 +103,10 @@ namespace Perspective.Character.NPC
             NpcConversationState = new NpcConversationState(this);
             NpcPickPocketState = new NpcPickPocketState(this);
             NpcYellState = new NpcYellState(this);
+            NpcIntimidationState = new NpcIntimidationState(this);
+            NpcFightState = new NpcFightState(this);
+            NpcFleeState = new NpcFleeState(this);
+            NpcChaseState = new NpcChaseState(this);
 
             ExitPoints = GameObject.FindWithTag("ExitPoints");
             switch (NpcType)
@@ -101,7 +122,9 @@ namespace Perspective.Character.NPC
                 case NpcType.Guard:
                 case NpcType.Beggar:
                 case NpcType.Aggressor:
-                default:
+                    break;
+                case NpcType.Brawler:
+                    InvokeRepeating(nameof(DetectFightEvent), 3.0f, 1.25f);
                     break;
             }
         }
@@ -187,6 +210,38 @@ namespace Perspective.Character.NPC
         }
 
         #endregion
+
+        #region Brawler
+
+        private void DetectFightEvent()
+        {
+            if (CurrentEvent != NpcEvent.None)
+            {
+                return;
+            }
+
+            var count = Physics.OverlapSphereNonAlloc(transform.position, brawlerRange,
+                hitsAnotherNpc);
+            for (var i = 0; i < count; i++)
+            {
+                var other = hitsAnotherNpc[i].GetComponent<NpcController>();
+                if (!other || other == this) continue;
+                if (other.NpcType != NpcType.Brawler) continue;
+
+                var dirToOther = (other.transform.position - transform.position).normalized;
+                var angle = Vector3.Angle(transform.forward, dirToOther);
+                if (!(angle <= brawlerAngle * 0.5f)) continue;
+
+                if (other.SetEvent(NpcEvent.Fight, this))
+                {
+                    SetEvent(NpcEvent.Fight, other);
+                    MainFighter = true;
+                }
+            }
+        }
+
+        #endregion
+
 
         public void OnAnimationEnterEvent()
         {

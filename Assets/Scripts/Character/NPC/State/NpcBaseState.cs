@@ -60,12 +60,14 @@ namespace Perspective.Character.NPC.State
                     NpcController.SwitchState(NpcController.NpcPickPocketState);
                     break;
                 case NpcEvent.Intimidation:
+                    break;
                 case NpcEvent.Fight:
+                    NpcController.SwitchState(NpcController.NpcIntimidationState);
+                    break;
                 case NpcEvent.Yell:
                 case NpcEvent.Chase:
                 case NpcEvent.Panic:
                 case NpcEvent.ChainReaction:
-                case NpcEvent.GroupBrawl:
                 case NpcEvent.StreetPerformance:
                 case NpcEvent.DisableEvent:
                 default:

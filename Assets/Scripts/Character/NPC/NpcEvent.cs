@@ -21,7 +21,6 @@
 
         // --- Complex / Emergent ---
         ChainReaction, // Combination event (e.g., theft → yell → chase)
-        GroupBrawl, // Multiple NPCs fighting at once
         StreetPerformance // NPC draws attention (begging, yelling, performing)
     }
 }

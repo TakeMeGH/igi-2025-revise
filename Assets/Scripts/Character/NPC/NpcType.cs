@@ -7,6 +7,7 @@
         Thief,
         Guard,
         Beggar,
-        Aggressor
+        Aggressor,
+        Brawler
     }
 }

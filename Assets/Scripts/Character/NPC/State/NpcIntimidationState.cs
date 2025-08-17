@@ -1,12 +1,14 @@
-using Perspective.Utils;
+using UnityEngine;
 
 namespace Perspective.Character.NPC.State
 {
-    public class NpcPickPocketState : NpcBaseState
+    public class NpcIntimidationState : NpcBaseState
     {
         private float _defaultStopingDistance;
-
-        public NpcPickPocketState(NpcController npcController) : base(npcController)
+        private bool _intimidationStarted;
+        private float _intimidationDuration;
+    
+        public NpcIntimidationState(NpcController npcController) : base(npcController)
         {
         }
 
@@ -15,19 +17,31 @@ namespace Perspective.Character.NPC.State
             base.Enter();
 
             NpcController.Agent.isStopped = false;
-
+            NpcController.Agent.speed = NpcController.RunSpeed;
+            
             NpcController.Animator.Play("Idle/Walk");
 
             _defaultStopingDistance = NpcController.Agent.stoppingDistance;
-            NpcController.Agent.stoppingDistance = NpcController.NearToStealDistance;
+            NpcController.Agent.stoppingDistance = NpcController.NearToBrawlDistance;
+
+            _intimidationDuration = 4.0f;
         }
 
         public override void Update()
         {
-            WalkToConversation();
+            if (_intimidationStarted)
+            {
+                _intimidationDuration -= Time.deltaTime;
+                if (_intimidationDuration > 0) return;
+                NpcController.SwitchState(NpcController.NpcFightState);
+            }
+            else
+            {
+                RunToFight();
+            }
         }
-
-        private void WalkToConversation()
+        
+        private void RunToFight()
         {
             NpcController.Agent.SetDestination(NpcController.OtherNpc.transform.position);
             NpcController.Animator.SetFloat(Speed, NpcController.Agent.velocity.magnitude);
@@ -36,22 +50,15 @@ namespace Perspective.Character.NPC.State
             if (NpcController.Agent.pathPending ||
                 !(NpcController.Agent.remainingDistance <= NpcController.Agent.stoppingDistance)) return;
 
-            NpcController.Animator.Play("Steal");
+            NpcController.Agent.velocity = Vector3.zero;
+            _intimidationStarted = true;
+            NpcController.Animator.Play("Intimidate");
             NpcController.Agent.isStopped = true;
-            NpcController.OtherNpc.SwitchState(NpcController.OtherNpc.NpcIdlingState);
         }
-
+        
         public override void Exit()
         {
-            NpcController.Agent.isStopped = true;
-            NpcController.ResetEvent();
             NpcController.Agent.stoppingDistance = _defaultStopingDistance;
-        }
-
-        public override void OnAnimationExitEvent()
-        {
-            NpcController.OtherNpc.SwitchState(NpcController.OtherNpc.NpcYellState);
-            NpcController.SwitchState(NpcController.NpcFleeState);
         }
     }
 }
