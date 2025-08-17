@@ -18,7 +18,7 @@ namespace Perspective.Character.NPC.State
             NpcController.Agent.isStopped = false;
             _conversationStarted = false;
 
-            _conversationDuration = Random.Range(3f, 8f);
+            _conversationDuration = 4f;
             
             NpcController.Animator.Play("Idle/Walk");
 
@@ -42,10 +42,6 @@ namespace Perspective.Character.NPC.State
 
         private void WalkToConversation()
         {
-            // var dir = (NpcController.transform.position - NpcController.OtherNpc.transform.position).normalized;
-            // var targetPos = NpcController.OtherNpc.transform.position + dir * NpcController.NearToTalkDistance;
-            //
-            // NpcController.Agent.SetDestination(targetPos);
             NpcController.Agent.SetDestination(NpcController.OtherNpc.transform.position);
             NpcController.Animator.SetFloat(Speed, NpcController.Agent.velocity.magnitude);
             UpdateRotation();

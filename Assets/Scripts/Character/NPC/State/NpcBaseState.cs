@@ -32,17 +32,33 @@ namespace Perspective.Character.NPC.State
             NpcController.OnUpdateEvent -= OnUpdateEvent;
         }
 
+        public virtual void OnAnimationEnterEvent()
+        {
+        }
+
+        public virtual void OnAnimationExitEvent()
+        {
+        }
+
+        public virtual void OnAnimationTransitionEvent()
+        {
+        }
+
         private void OnUpdateEvent(NpcEvent npcEvent, NpcController other)
         {
             switch (npcEvent)
             {
                 case NpcEvent.None:
+                    break;
                 case NpcEvent.Conversation:
                     NpcController.SwitchState(NpcController.NpcConversationState);
                     break;
                 case NpcEvent.BeggingInteraction:
                 case NpcEvent.CrowdGathering:
-                case NpcEvent.PickPocketAttempt:
+                    break;
+                case NpcEvent.PickPocket:
+                    NpcController.SwitchState(NpcController.NpcPickPocketState);
+                    break;
                 case NpcEvent.Intimidation:
                 case NpcEvent.Fight:
                 case NpcEvent.Yell:
@@ -51,6 +67,7 @@ namespace Perspective.Character.NPC.State
                 case NpcEvent.ChainReaction:
                 case NpcEvent.GroupBrawl:
                 case NpcEvent.StreetPerformance:
+                case NpcEvent.DisableEvent:
                 default:
                     break;
             }

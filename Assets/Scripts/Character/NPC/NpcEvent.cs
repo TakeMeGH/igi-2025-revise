@@ -3,13 +3,14 @@
     public enum NpcEvent
     {
         None = 0,
+        DisableEvent = 1,
         // --- Social / Neutral ---
         Conversation, // Two or more NPCs talking
         BeggingInteraction, // Beggar asks, Civilian responds (or ignores)
         CrowdGathering, // NPCs cluster to watch or chat
 
         // --- Conflict / Crime ---
-        PickPocketAttempt, // Thief tries to steal from victim
+        PickPocket, // Thief tries to steal from victim
         Intimidation, // Aggressor threatens victim
         Fight, // NPCs punching each other
 

@@ -6,7 +6,8 @@ namespace Perspective.Utils
 {
     public static class NavMeshUtils
     {
-        public static Vector3 GetRandomPointOnSurface(NavMeshSurface surface, int areaMask = NavMesh.AllAreas, int maxTries = 30)
+        public static Vector3 GetRandomPointOnSurface(NavMeshSurface surface, int areaMask = NavMesh.AllAreas,
+            int maxTries = 30)
         {
             var bounds = surface.navMeshData.sourceBounds;
 
@@ -27,6 +28,13 @@ namespace Perspective.Utils
             }
 
             return surface.transform.position;
+        }
+
+        public static bool SetDestinationNearest(NavMeshAgent agent, Vector3 targetPosition, float maxDistance = 99999f)
+        {
+            if (!NavMesh.SamplePosition(targetPosition, out var hit, maxDistance, NavMesh.AllAreas)) return false;
+            agent.SetDestination(hit.position);
+            return true;
         }
     }
 }
