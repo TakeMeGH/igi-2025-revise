@@ -22,13 +22,16 @@ namespace Perspective.Character.NPC.State
 
             NpcController.ResetEvent();
             NpcController.SetEvent(NpcEvent.DisableEvent, NpcController);
-            NpcController.transform.LookAt(NpcController.OtherNpc.transform.position); }
+            NpcController.transform.LookAt(NpcController.OtherNpc.transform.position);
+        }
 
         public override void Update()
         {
             if (_yellDuration > 0)
             {
                 _yellDuration -= Time.deltaTime;
+                if (NpcController.OtherNpc)
+                    NpcController.transform.LookAt(NpcController.OtherNpc.transform.position);
                 return;
             }
 

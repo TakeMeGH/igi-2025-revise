@@ -33,13 +33,16 @@ namespace Perspective.Character.NPC.State
 
         public override void Update()
         {
-            if (_isChase && _toChaseDuration > 0)
+            switch (_isChase)
             {
-                _toChaseDuration -= Time.deltaTime;
-            }
-            else if (_isChase)
-            {
-                NpcController.SwitchState(NpcController.NpcChaseState);
+                case true when _toChaseDuration > 0:
+                    if (NpcController.OtherNpc)
+                        NpcController.transform.LookAt(NpcController.OtherNpc.transform.position);
+                    _toChaseDuration -= Time.deltaTime;
+                    break;
+                case true:
+                    NpcController.SwitchState(NpcController.NpcChaseState);
+                    break;
             }
         }
 

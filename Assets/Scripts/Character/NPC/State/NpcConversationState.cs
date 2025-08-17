@@ -42,6 +42,11 @@ namespace Perspective.Character.NPC.State
 
         private void WalkToConversation()
         {
+            if (!NpcController.OtherNpc)
+            {
+                NpcController.SwitchState(NpcController.NpcIdlingState);
+                return;
+            }
             NpcController.Agent.SetDestination(NpcController.OtherNpc.transform.position);
             NpcController.Animator.SetFloat(Speed, NpcController.Agent.velocity.magnitude);
             UpdateRotation();
