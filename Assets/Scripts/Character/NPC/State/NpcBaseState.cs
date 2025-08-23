@@ -15,7 +15,6 @@ namespace Perspective.Character.NPC.State
 
         public virtual void Enter()
         {
-            NpcController.OnUpdateEvent += OnUpdateEvent;
             NpcController.Agent.updateRotation = false;
         }
 
@@ -29,7 +28,6 @@ namespace Perspective.Character.NPC.State
 
         public virtual void Exit()
         {
-            NpcController.OnUpdateEvent -= OnUpdateEvent;
         }
 
         public virtual void OnAnimationEnterEvent()
@@ -44,7 +42,7 @@ namespace Perspective.Character.NPC.State
         {
         }
 
-        private void OnUpdateEvent(NpcEvent npcEvent, NpcController other)
+        public void OnUpdateEvent(NpcEvent npcEvent, NpcController other)
         {
             switch (npcEvent)
             {
@@ -60,8 +58,11 @@ namespace Perspective.Character.NPC.State
                 case NpcEvent.Fight:
                     NpcController.SwitchState(NpcController.NpcTrashTalkState);
                     break;
-                case NpcEvent.Begging:
                 case NpcEvent.Intimidation:
+                    if (NpcController.NpcType == NpcType.Collector)
+                        NpcController.SwitchState(NpcController.NpcTrashTalkState);
+                    break;
+                case NpcEvent.Begging:
                 case NpcEvent.DisableEvent:
                 default:
                     break;

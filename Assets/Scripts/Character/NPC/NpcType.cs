@@ -8,6 +8,7 @@
         Police,
         Beggar,
         Merchant,
-        Brawler
+        Brawler,
+        Collector
     }
 }

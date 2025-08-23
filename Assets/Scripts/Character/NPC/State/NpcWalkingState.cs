@@ -46,7 +46,7 @@ namespace Perspective.Character.NPC.State
         
         private void PickNewDestination()
         {
-            var newPos = NavMeshUtils.GetRandomPointOnSurface(NpcController.CurrentSurface);
+            var newPos = NavMeshUtils.Instance.GetRandomPointOnSurface(NpcController.CurrentSurface);
             NpcController.Agent.SetDestination(newPos);
         }
 

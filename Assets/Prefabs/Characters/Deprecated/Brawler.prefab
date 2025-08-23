@@ -7856,6 +7856,8 @@ MonoBehaviour:
   brawlerRange: 12
   brawlerAngle: 120
   nearToBrawlDistance: 0.6
+  brawlTarget: 6
+  brawlEvent: 6
   isPunching: 0
 --- !u!195 &5906150412971776317
 NavMeshAgent:

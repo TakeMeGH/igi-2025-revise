@@ -20,7 +20,7 @@ namespace Perspective.Character.NPC.State
 
             NpcController.SetEvent(NpcEvent.DisableEvent, NpcController);
 
-            NavMeshUtils.SetDestinationNearest(NpcController.Agent,
+            NavMeshUtils.Instance.SetDestinationNearest(NpcController.Agent,
                 NpcController.ExitPoints.transform.GetChild(NpcController.chaseIndex).transform.position);
 
             NpcController.Agent.speed = NpcController.RunSpeed;

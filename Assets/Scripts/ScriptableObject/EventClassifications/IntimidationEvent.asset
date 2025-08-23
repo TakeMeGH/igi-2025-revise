@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
+  m_Name: IntimidationEvent
+  m_EditorClassIdentifier: 
+  npcEvent: 5
+  imageContext: Seorang preman sedang mengintimidasi pedagang kecil di pinggir jalan.
+  examples:
+  - headline: Preman kembali memeras pedagang kecil di pasar tradisional
+    output: 3
+  - headline: Polisi bertindak cepat menindak aksi premanisme di kawasan pasar
+    output: 2
+  - headline: Keributan kecil terjadi di pasar sore hari ini
+    output: 1
+  - headline: Langit cerah, warga ramai belanja kebutuhan sehari-hari
+    output: 1

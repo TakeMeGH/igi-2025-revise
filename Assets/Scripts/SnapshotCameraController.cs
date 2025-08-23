@@ -144,7 +144,7 @@ namespace Perspective
         private void SetUploadUI()
         {
             uploadUIEvent.RaiseEvent(true, _snapshotHistory);
-            ClearSnapshots();
+            _snapshotHistory.Clear();
         }
 
         private void ClearSnapshots()

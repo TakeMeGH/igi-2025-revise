@@ -25,8 +25,11 @@ namespace Perspective.Character.NPC.State
             base.Update();
             if (NpcController.NpcType == NpcType.Merchant)
             {
+                if (NpcController.OtherNpc)
+                    NpcController.transform.LookAt(NpcController.OtherNpc.transform.position);
                 return;
             }
+
             if (_idleDuration > 0)
             {
                 _idleDuration -= Time.deltaTime;

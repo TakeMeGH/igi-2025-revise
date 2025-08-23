@@ -28,7 +28,6 @@ namespace Perspective.Character.NPC
 
         [SerializeField] private NpcController otherNpc;
         public NpcController OtherNpc => otherNpc;
-        public Action<NpcEvent, NpcController> OnUpdateEvent;
 
         #endregion
 
@@ -64,11 +63,13 @@ namespace Perspective.Character.NPC
 
         #endregion
 
-        #region Brawler Attributes
+        #region Brawler / Collector Attributes
 
-        [Header("Brawler Attributes")] [SerializeField] private float brawlerRange;
+        [Header("Brawler / Collector Attributes")] [SerializeField] private float brawlerRange;
         [SerializeField] private float brawlerAngle;
         [SerializeField] private float nearToBrawlDistance;
+        [SerializeField] private NpcType brawlTarget = NpcType.Brawler;
+        [SerializeField] private NpcEvent brawlEvent = NpcEvent.Fight;
         public float NearToBrawlDistance => nearToBrawlDistance;
         public bool MainFighter { get; private set; }
         public bool isPunching;
@@ -89,12 +90,7 @@ namespace Perspective.Character.NPC
         public NpcBeggingState NpcBeggingState { get; private set; }
 
         #endregion
-
-        private void OnDisable()
-        {
-            OnUpdateEvent = null;
-        }
-
+        
         private void Initialize()
         {
             Animator = GetComponent<Animator>();
@@ -143,6 +139,9 @@ namespace Perspective.Character.NPC
                 case NpcType.Brawler:
                     InvokeRepeating(nameof(DetectFightEvent), 10.0f, 2.5f);
                     break;
+                case NpcType.Collector:
+                    InvokeRepeating(nameof(DetectFightEvent), 10.0f, 2.5f);
+                    break;
             }
         }
 
@@ -172,7 +171,7 @@ namespace Perspective.Character.NPC
         {
             currentEvent = npcEvent;
             otherNpc = other;
-            OnUpdateEvent.Invoke(currentEvent, other);
+            ((NpcBaseState)CurrentState).OnUpdateEvent(currentEvent, other);
         }
 
         public bool SetEvent(NpcEvent npcEvent, NpcController other)
@@ -181,7 +180,7 @@ namespace Perspective.Character.NPC
 
             currentEvent = npcEvent;
             otherNpc = other;
-            OnUpdateEvent.Invoke(currentEvent, other);
+            ((NpcBaseState)CurrentState).OnUpdateEvent(currentEvent, other);
             return true;
         }
 
@@ -189,6 +188,12 @@ namespace Perspective.Character.NPC
         {
             currentEvent = NpcEvent.None;
         }
+        
+        public void ResetOtherNpc()
+        {
+            otherNpc = null;
+        }
+
 
         public void SetEventDetector(bool isEnable)
         {
@@ -272,15 +277,15 @@ namespace Perspective.Character.NPC
             {
                 var other = hitsAnotherNpc[i].GetComponent<NpcController>();
                 if (!other || other == this) continue;
-                if (other.NpcType != NpcType.Brawler) continue;
+                if (other.NpcType != brawlTarget) continue;
 
                 var dirToOther = (other.transform.position - transform.position).normalized;
                 var angle = Vector3.Angle(transform.forward, dirToOther);
                 if (!(angle <= brawlerAngle * 0.5f)) continue;
 
-                if (!other.SetEvent(NpcEvent.Fight, this)) continue;
+                if (!other.SetEvent(brawlEvent, this)) continue;
 
-                SetEvent(NpcEvent.Fight, other);
+                SetEvent(brawlEvent, other);
                 MainFighter = true;
                 break;
             }
@@ -308,7 +313,6 @@ namespace Perspective.Character.NPC
         {
             OnNpcDestroyed?.Invoke();
             OnNpcDestroyed = null;
-            OnUpdateEvent = null;
             CancelInvoke();
             Destroy(gameObject);
         }

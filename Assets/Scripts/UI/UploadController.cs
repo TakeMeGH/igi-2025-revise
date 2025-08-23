@@ -52,6 +52,10 @@ namespace Perspective.UI
                 return;
             }
 
+            foreach (var snapshotData in _snapshotHistory)
+            {
+                snapshotData.Dispose();
+            }
             _snapshotHistory.Clear();
             _snapshotHistory.AddRange(snapshotHistory);
             

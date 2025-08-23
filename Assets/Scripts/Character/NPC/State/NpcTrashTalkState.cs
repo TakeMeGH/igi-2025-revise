@@ -7,7 +7,7 @@ namespace Perspective.Character.NPC.State
         private float _defaultStopingDistance;
         private bool _intimidationStarted;
         private float _intimidationDuration;
-    
+
         public NpcTrashTalkState(NpcController npcController) : base(npcController)
         {
         }
@@ -18,7 +18,7 @@ namespace Perspective.Character.NPC.State
 
             NpcController.Agent.isStopped = false;
             NpcController.Agent.speed = NpcController.RunSpeed;
-            
+
             NpcController.Animator.Play("Idle/Walk");
 
             _defaultStopingDistance = NpcController.Agent.stoppingDistance;
@@ -33,15 +33,28 @@ namespace Perspective.Character.NPC.State
             {
                 _intimidationDuration -= Time.deltaTime;
                 if (_intimidationDuration > 0) return;
-                NpcController.SwitchState(NpcController.NpcFightState);
+                switch (NpcController.NpcType)
+                {
+                    case NpcType.Brawler:
+                        NpcController.SwitchState(NpcController.NpcFightState);
+                        break;
+                    case NpcType.Collector:
+                        NpcController.SwitchState(NpcController.NpcFleeState);
+                        
+                        NpcController.SetEventDetector(false);
+                        
+                        NpcController.OtherNpc.ResetEvent();
+                        NpcController.SetEventDetector(false);
+                        break;
+                }
             }
             else
             {
-                RunToFight();
+                RunToTrashTalk();
             }
         }
-        
-        private void RunToFight()
+
+        private void RunToTrashTalk()
         {
             NpcController.Agent.SetDestination(NpcController.OtherNpc.transform.position);
             NpcController.Animator.SetFloat(Speed, NpcController.Agent.velocity.magnitude);
@@ -54,8 +67,13 @@ namespace Perspective.Character.NPC.State
             _intimidationStarted = true;
             NpcController.Animator.Play("Intimidate");
             NpcController.Agent.isStopped = true;
+
+            if (NpcController.NpcType != NpcType.Collector) return;
+
+            NpcController.SetEventDetector(true);
+            NpcController.OtherNpc.SetEventDetector(true);
         }
-        
+
         public override void Exit()
         {
             NpcController.Agent.stoppingDistance = _defaultStopingDistance;
