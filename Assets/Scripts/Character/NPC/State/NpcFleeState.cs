@@ -4,6 +4,7 @@ namespace Perspective.Character.NPC.State
 {
     public class NpcFleeState : NpcBaseState
     {
+        private bool _isGettingDestroyed;
         public NpcFleeState(NpcController npcController) : base(npcController)
         {
         }
@@ -23,6 +24,8 @@ namespace Perspective.Character.NPC.State
 
             NpcController.Agent.speed = NpcController.RunSpeed;
 
+            _isGettingDestroyed = false;
+            
             NpcController.Animator.Play("Idle/Walk");
         }
 
@@ -32,6 +35,9 @@ namespace Perspective.Character.NPC.State
             UpdateRotation();
             if (NpcController.Agent.pathPending ||
                 !(NpcController.Agent.remainingDistance <= NpcController.Agent.stoppingDistance)) return;
+            if (_isGettingDestroyed) return;
+
+            _isGettingDestroyed = true;
             NpcController.SelfDestroy();
         }
 

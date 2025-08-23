@@ -84,7 +84,7 @@ namespace Perspective
 
             if (_snapshotHistory.Count > 10)
             {
-                _snapshotHistory.Clear();
+                ClearSnapshots();
             }
 
             snapshotCamera.targetTexture = renderTexture;
@@ -122,7 +122,7 @@ namespace Perspective
                 var viewportPos = snapshotCamera.WorldToViewportPoint(hit.transform.position);
 
                 if (viewportPos is not { z: > 0, x: >= 0 and <= 1, y: >= 0 and <= 1 }) continue;
-                
+
                 totalCount++;
 
                 var npc = hit.GetComponentInParent<NpcController>();
@@ -144,6 +144,16 @@ namespace Perspective
         private void SetUploadUI()
         {
             uploadUIEvent.RaiseEvent(true, _snapshotHistory);
+            ClearSnapshots();
+        }
+
+        private void ClearSnapshots()
+        {
+            foreach (var data in _snapshotHistory)
+            {
+                data.Dispose();
+            }
+
             _snapshotHistory.Clear();
         }
     }
@@ -158,6 +168,13 @@ namespace Perspective
         {
             this.image = image;
             Counts = counts;
+        }
+
+        public void Dispose()
+        {
+            if (!image) return;
+            Object.Destroy(image);
+            image = null;
         }
     }
 }

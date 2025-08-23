@@ -97,6 +97,29 @@ Tugas Anda adalah membuat 15 komentar singkat dan alami berdasarkan judul berita
 - dst.
 ";
         }
+        
+        public string BuildNoneEventCommentsPrompt()
+        {
+            return  @"
+Anda adalah generator komentar netizen di media sosial. 
+Tugas Anda adalah membuat komentar singkat dan alami berdasarkan judul berita yang diberikan pengguna. 
+Namun, pada kasus ini gambar yang menyertainya tidak ada hubungannya (tidak relevan) dengan berita.
+
+# Instruksi
+1. Buat 15 komentar netizen.
+2. Nada komentar jangan supportive, tapi lebih ke:
+   - bingung,
+   - nyinyir,
+   - bercanda,
+   - mempertanyakan relevansi.
+3. Gunakan bahasa sehari-hari, informal khas netizen.
+4. Panjang komentar 1–2 kalimat.
+
+# Format Output
+- Kembalikan daftar komentar dalam bentuk bullet point.
+";
+        }
+
 
         public string BuildStancePrompt(NpcEvent currentEvent)
         {

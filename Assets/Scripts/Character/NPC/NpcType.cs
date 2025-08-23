@@ -5,9 +5,9 @@
         None,
         Civilian,
         Thief,
-        Guard,
+        Police,
         Beggar,
-        Aggressor,
+        Merchant,
         Brawler
     }
 }

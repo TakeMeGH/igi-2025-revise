@@ -53,23 +53,15 @@ namespace Perspective.Character.NPC.State
                 case NpcEvent.Conversation:
                     NpcController.SwitchState(NpcController.NpcConversationState);
                     break;
-                case NpcEvent.BeggingInteraction:
-                case NpcEvent.CrowdGathering:
-                    break;
                 case NpcEvent.PickPocket:
                     if (NpcController.NpcType == NpcType.Thief)
                         NpcController.SwitchState(NpcController.NpcPickPocketState);
                     break;
-                case NpcEvent.Intimidation:
-                    break;
                 case NpcEvent.Fight:
-                    NpcController.SwitchState(NpcController.NpcIntimidationState);
+                    NpcController.SwitchState(NpcController.NpcTrashTalkState);
                     break;
-                case NpcEvent.Yell:
-                case NpcEvent.Chase:
-                case NpcEvent.Panic:
-                case NpcEvent.ChainReaction:
-                case NpcEvent.StreetPerformance:
+                case NpcEvent.Begging:
+                case NpcEvent.Intimidation:
                 case NpcEvent.DisableEvent:
                 default:
                     break;

@@ -82,12 +82,11 @@ namespace Perspective.Character.NPC
         public NpcConversationState NpcConversationState { get; private set; }
         public NpcPickPocketState NpcPickPocketState { get; private set; }
         public NpcYellState NpcYellState { get; private set; }
-        public NpcIntimidationState NpcIntimidationState { get; private set; }
+        public NpcTrashTalkState NpcTrashTalkState { get; private set; }
         public NpcFightState NpcFightState { get; private set; }
-
         public NpcFleeState NpcFleeState { get; private set; }
-
         public NpcChaseState NpcChaseState { get; private set; }
+        public NpcBeggingState NpcBeggingState { get; private set; }
 
         #endregion
 
@@ -106,10 +105,11 @@ namespace Perspective.Character.NPC
             NpcConversationState = new NpcConversationState(this);
             NpcPickPocketState = new NpcPickPocketState(this);
             NpcYellState = new NpcYellState(this);
-            NpcIntimidationState = new NpcIntimidationState(this);
+            NpcTrashTalkState = new NpcTrashTalkState(this);
             NpcFightState = new NpcFightState(this);
             NpcFleeState = new NpcFleeState(this);
             NpcChaseState = new NpcChaseState(this);
+            NpcBeggingState = new NpcBeggingState(this);
 
             identifierCollider.enabled = false;
 
@@ -131,17 +131,33 @@ namespace Perspective.Character.NPC
                 case NpcType.None:
                     break;
                 case NpcType.Civilian:
-                    InvokeRepeating(nameof(DetectConversationEvent), 5.0f, 10.0f);
+                    InvokeRepeating(nameof(DetectConversationEvent), 10.0f, 2.5f);
                     break;
                 case NpcType.Thief:
                     InvokeRepeating(nameof(DetectStealEvent), 10.0f, 2.5f);
                     break;
-                case NpcType.Guard:
+                case NpcType.Police:
                 case NpcType.Beggar:
-                case NpcType.Aggressor:
+                case NpcType.Merchant:
                     break;
                 case NpcType.Brawler:
-                    InvokeRepeating(nameof(DetectFightEvent), 3.0f, 1.25f);
+                    InvokeRepeating(nameof(DetectFightEvent), 10.0f, 2.5f);
+                    break;
+            }
+        }
+
+        private void StartFirstState()
+        {
+            switch (npcType)
+            {
+                case NpcType.Beggar:
+                    SwitchState(NpcBeggingState);
+                    break;
+                case NpcType.Merchant:
+                    SwitchState(NpcIdlingState);
+                    break;
+                default:
+                    SwitchState(NpcWalkingState);
                     break;
             }
         }
@@ -149,7 +165,7 @@ namespace Perspective.Character.NPC
         private void Start()
         {
             Initialize();
-            SwitchState(NpcIdlingState);
+            StartFirstState();
         }
 
         public void ForcedSetEvent(NpcEvent npcEvent, NpcController other)
@@ -202,7 +218,7 @@ namespace Perspective.Character.NPC
                 if (!(angle <= talkAngle * 0.5f)) continue;
 
                 if (!other.SetEvent(NpcEvent.Conversation, this)) continue;
-                
+
                 SetEvent(NpcEvent.Conversation, other);
                 break;
             }
@@ -263,7 +279,7 @@ namespace Perspective.Character.NPC
                 if (!(angle <= brawlerAngle * 0.5f)) continue;
 
                 if (!other.SetEvent(NpcEvent.Fight, this)) continue;
-                
+
                 SetEvent(NpcEvent.Fight, other);
                 MainFighter = true;
                 break;
@@ -290,8 +306,10 @@ namespace Perspective.Character.NPC
 
         public void SelfDestroy()
         {
-            OnNpcDestroyed.Invoke();
+            OnNpcDestroyed?.Invoke();
             OnNpcDestroyed = null;
+            OnUpdateEvent = null;
+            CancelInvoke();
             Destroy(gameObject);
         }
     }

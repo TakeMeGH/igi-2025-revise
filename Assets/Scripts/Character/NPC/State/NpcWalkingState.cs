@@ -14,7 +14,7 @@ namespace Perspective.Character.NPC.State
         {
             base.Enter();
             
-            _walkDuration = Random.Range(2f, 6f);
+            _walkDuration = Random.Range(10f, 15f);
             
             PickNewDestination();
 
