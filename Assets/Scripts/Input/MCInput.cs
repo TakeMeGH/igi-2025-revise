@@ -136,6 +136,15 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Upload"",
+                    ""type"": ""Button"",
+                    ""id"": ""961fe541-3ad7-4284-a652-fac14acb26c9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -336,14 +345,47 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                     ""action"": ""Snapshot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b6eaa85-4119-448c-8146-7d04d2df7104"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Upload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
             ""name"": ""UI"",
             ""id"": ""272f6d14-89ba-496f-b7ff-215263d3219f"",
-            ""actions"": [],
-            ""bindings"": []
+            ""actions"": [
+                {
+                    ""name"": ""CloseUpload"",
+                    ""type"": ""Button"",
+                    ""id"": ""02894c3c-51e3-431c-919f-7c6acd174162"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f044aedb-ca6c-4412-92ba-18bc896ee07b"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseUpload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -416,8 +458,10 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Camera = m_Gameplay.FindAction("Camera", throwIfNotFound: true);
         m_Gameplay_Snapshot = m_Gameplay.FindAction("Snapshot", throwIfNotFound: true);
+        m_Gameplay_Upload = m_Gameplay.FindAction("Upload", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_CloseUpload = m_UI.FindAction("CloseUpload", throwIfNotFound: true);
     }
 
     ~@MCInput()
@@ -504,6 +548,7 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Camera;
     private readonly InputAction m_Gameplay_Snapshot;
+    private readonly InputAction m_Gameplay_Upload;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -535,6 +580,10 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Snapshot".
         /// </summary>
         public InputAction @Snapshot => m_Wrapper.m_Gameplay_Snapshot;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Upload".
+        /// </summary>
+        public InputAction @Upload => m_Wrapper.m_Gameplay_Upload;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -576,6 +625,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @Snapshot.started += instance.OnSnapshot;
             @Snapshot.performed += instance.OnSnapshot;
             @Snapshot.canceled += instance.OnSnapshot;
+            @Upload.started += instance.OnUpload;
+            @Upload.performed += instance.OnUpload;
+            @Upload.canceled += instance.OnUpload;
         }
 
         /// <summary>
@@ -602,6 +654,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @Snapshot.started -= instance.OnSnapshot;
             @Snapshot.performed -= instance.OnSnapshot;
             @Snapshot.canceled -= instance.OnSnapshot;
+            @Upload.started -= instance.OnUpload;
+            @Upload.performed -= instance.OnUpload;
+            @Upload.canceled -= instance.OnUpload;
         }
 
         /// <summary>
@@ -639,6 +694,7 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_CloseUpload;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -650,6 +706,10 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
         public UIActions(@MCInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "UI/CloseUpload".
+        /// </summary>
+        public InputAction @CloseUpload => m_Wrapper.m_UI_CloseUpload;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -676,6 +736,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @CloseUpload.started += instance.OnCloseUpload;
+            @CloseUpload.performed += instance.OnCloseUpload;
+            @CloseUpload.canceled += instance.OnCloseUpload;
         }
 
         /// <summary>
@@ -687,6 +750,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UIActions" />
         private void UnregisterCallbacks(IUIActions instance)
         {
+            @CloseUpload.started -= instance.OnCloseUpload;
+            @CloseUpload.performed -= instance.OnCloseUpload;
+            @CloseUpload.canceled -= instance.OnCloseUpload;
         }
 
         /// <summary>
@@ -827,6 +893,13 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSnapshot(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Upload" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUpload(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -835,5 +908,12 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
     /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
     public interface IUIActions
     {
+        /// <summary>
+        /// Method invoked when associated input action "CloseUpload" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCloseUpload(InputAction.CallbackContext context);
     }
 }

@@ -11,7 +11,7 @@ namespace Perspective.Character.NPC
     {
         #region Component
 
-        [Header("Component")] [SerializeField] private NavMeshSurface currentSurface;
+        [Header("Component")] private NavMeshSurface currentSurface;
         public NavMeshSurface CurrentSurface => currentSurface;
         public Animator Animator { get; private set; }
         public NavMeshAgent Agent { get; private set; }
@@ -39,7 +39,9 @@ namespace Perspective.Character.NPC
         [SerializeField] private float runSpeed = 4f;
         public float RunSpeed => runSpeed;
         public int chaseIndex;
+        public Collider identifierCollider;
         private readonly Collider[] hitsAnotherNpc = new Collider[105];
+        public Action OnNpcDestroyed;
 
         #endregion
 
@@ -86,6 +88,7 @@ namespace Perspective.Character.NPC
         public NpcFleeState NpcFleeState { get; private set; }
 
         public NpcChaseState NpcChaseState { get; private set; }
+
         #endregion
 
         private void OnDisable()
@@ -107,6 +110,20 @@ namespace Perspective.Character.NPC
             NpcFightState = new NpcFightState(this);
             NpcFleeState = new NpcFleeState(this);
             NpcChaseState = new NpcChaseState(this);
+
+            identifierCollider.enabled = false;
+
+            var surfaces = GameObject.FindObjectsByType<NavMeshSurface>(FindObjectsSortMode.None);
+
+            if (surfaces.Length > 0)
+            {
+                currentSurface = surfaces[0];
+            }
+            else
+            {
+                Debug.LogError("❌ No NavMeshSurface found in the scene!");
+            }
+
 
             ExitPoints = GameObject.FindWithTag("ExitPoints");
             switch (NpcType)
@@ -135,6 +152,13 @@ namespace Perspective.Character.NPC
             SwitchState(NpcIdlingState);
         }
 
+        public void ForcedSetEvent(NpcEvent npcEvent, NpcController other)
+        {
+            currentEvent = npcEvent;
+            otherNpc = other;
+            OnUpdateEvent.Invoke(currentEvent, other);
+        }
+
         public bool SetEvent(NpcEvent npcEvent, NpcController other)
         {
             if (currentEvent != NpcEvent.None) return false;
@@ -148,6 +172,11 @@ namespace Perspective.Character.NPC
         public void ResetEvent()
         {
             currentEvent = NpcEvent.None;
+        }
+
+        public void SetEventDetector(bool isEnable)
+        {
+            identifierCollider.enabled = isEnable;
         }
 
 
@@ -172,10 +201,10 @@ namespace Perspective.Character.NPC
                 var angle = Vector3.Angle(transform.forward, dirToOther);
                 if (!(angle <= talkAngle * 0.5f)) continue;
 
-                if (other.SetEvent(NpcEvent.Conversation, this))
-                {
-                    SetEvent(NpcEvent.Conversation, other);
-                }
+                if (!other.SetEvent(NpcEvent.Conversation, this)) continue;
+                
+                SetEvent(NpcEvent.Conversation, other);
+                break;
             }
         }
 
@@ -206,6 +235,7 @@ namespace Perspective.Character.NPC
 
                 other.Stolen = true;
                 SetEvent(NpcEvent.PickPocket, other);
+                break;
             }
         }
 
@@ -232,11 +262,11 @@ namespace Perspective.Character.NPC
                 var angle = Vector3.Angle(transform.forward, dirToOther);
                 if (!(angle <= brawlerAngle * 0.5f)) continue;
 
-                if (other.SetEvent(NpcEvent.Fight, this))
-                {
-                    SetEvent(NpcEvent.Fight, other);
-                    MainFighter = true;
-                }
+                if (!other.SetEvent(NpcEvent.Fight, this)) continue;
+                
+                SetEvent(NpcEvent.Fight, other);
+                MainFighter = true;
+                break;
             }
         }
 
@@ -260,6 +290,8 @@ namespace Perspective.Character.NPC
 
         public void SelfDestroy()
         {
+            OnNpcDestroyed.Invoke();
+            OnNpcDestroyed = null;
             Destroy(gameObject);
         }
     }

@@ -175,12 +175,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnabled: 0
   inputReader: {fileID: 11400000, guid: 69ae5acc6a18fff408b10875e466a482, type: 2}
+  uploadUIEvent: {fileID: 11400000, guid: 9e4152d0914b6a542bab62980f924df8, type: 2}
   mainCamera: {fileID: 0}
   snapshotCamera: {fileID: 5215296149286156711}
   renderTexture: {fileID: 8400000, guid: 46330031c2f582141a4cddb002cb50b7, type: 2}
+  distanceCameraToWorld: 10
   snapshotDisplay: {fileID: 0}
   frameUI: {fileID: 0}
-  historyImageGrid: {fileID: 0}
+  cameraHUD: {fileID: 0}
   eventLayer:
     serializedVersion: 2
     m_Bits: 64

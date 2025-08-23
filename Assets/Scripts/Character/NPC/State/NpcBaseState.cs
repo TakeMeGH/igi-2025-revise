@@ -57,7 +57,8 @@ namespace Perspective.Character.NPC.State
                 case NpcEvent.CrowdGathering:
                     break;
                 case NpcEvent.PickPocket:
-                    NpcController.SwitchState(NpcController.NpcPickPocketState);
+                    if (NpcController.NpcType == NpcType.Thief)
+                        NpcController.SwitchState(NpcController.NpcPickPocketState);
                     break;
                 case NpcEvent.Intimidation:
                     break;

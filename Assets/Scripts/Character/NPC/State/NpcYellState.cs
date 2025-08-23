@@ -20,8 +20,6 @@ namespace Perspective.Character.NPC.State
 
             NpcController.Agent.isStopped = true;
 
-            NpcController.ResetEvent();
-            NpcController.SetEvent(NpcEvent.DisableEvent, NpcController);
             NpcController.transform.LookAt(NpcController.OtherNpc.transform.position);
         }
 

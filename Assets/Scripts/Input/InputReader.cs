@@ -14,12 +14,14 @@ namespace Perspective.Input
         public Action InteractEvent;
         public Action CameraEvent;
         public Action SnapshotEvent;
+        public Action UploadEvent;
 
         #endregion
 
         #region UI
 
         public Action UnPausePerformed;
+        public Action CloseUploadEvent;
 
         #endregion
 
@@ -95,9 +97,25 @@ namespace Perspective.Input
             }
         }
 
+        public void OnUpload(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                UploadEvent?.Invoke();
+            }
+        }
+
         #endregion
 
         #region UI
+
+        public void OnCloseUpload(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                CloseUploadEvent?.Invoke();
+            }
+        }
 
         #endregion
     }

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Perspective.Character.NPC;
+using Perspective.Event;
 using Perspective.Input;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,19 +12,18 @@ namespace Perspective
         [Header("Settings")] [SerializeField] private bool isEnabled;
 
         [Header("Input")] [SerializeField] private InputReader inputReader;
+        [SerializeField] private UploadUIEvent uploadUIEvent;
 
         [Header("Cameras")] [SerializeField] private Camera mainCamera;
         [SerializeField] private Camera snapshotCamera;
         private bool _isUsingCamera;
 
-        [Header("Snapshot Output")] [SerializeField]
-        private RenderTexture renderTexture;
-
+        [Header("Snapshot Output")] [SerializeField] private RenderTexture renderTexture;
+        [SerializeField] private float distanceCameraToWorld;
         [SerializeField] private RawImage snapshotDisplay;
         [SerializeField] private RectTransform frameUI;
-        [SerializeField] private GameObject historyImageGrid;
-        private readonly List<Texture2D> _snapshotHistory = new();
-
+        [SerializeField] private CanvasGroup cameraHUD;
+        private readonly List<SnapshotData> _snapshotHistory = new();
 
         [Header("Detection")] [SerializeField] private LayerMask eventLayer;
 
@@ -30,12 +31,14 @@ namespace Perspective
         {
             inputReader.CameraEvent += UseCamera;
             inputReader.SnapshotEvent += TakeSnapshot;
+            inputReader.UploadEvent += SetUploadUI;
         }
 
         private void OnDisable()
         {
             inputReader.CameraEvent -= UseCamera;
             inputReader.SnapshotEvent -= TakeSnapshot;
+            inputReader.UploadEvent -= SetUploadUI;
         }
 
         private void Start()
@@ -47,7 +50,7 @@ namespace Perspective
         {
             if (!_isUsingCamera) return;
             Vector3 mousePos = UnityEngine.Input.mousePosition;
-            mousePos.z = 10f; // ← Distance from camera to world
+            mousePos.z = distanceCameraToWorld;
             Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
 
             transform.position = new Vector3(mainCamera.transform.position.x,
@@ -57,8 +60,7 @@ namespace Perspective
 
         private void SetCamera(bool enableCamera)
         {
-            snapshotDisplay.enabled = enableCamera;
-            frameUI.GetComponent<Image>().enabled = enableCamera;
+            cameraHUD.alpha = enableCamera ? 1 : 0;
             _isUsingCamera = enableCamera;
         }
 
@@ -71,6 +73,7 @@ namespace Perspective
         private void TakeSnapshot()
         {
             if (!_isUsingCamera) return;
+
             if (renderTexture &&
                 renderTexture.graphicsFormat != UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_SRGB)
             {
@@ -79,11 +82,14 @@ namespace Perspective
                 renderTexture.Create();
             }
 
-            // Render camera to texture
+            if (_snapshotHistory.Count > 10)
+            {
+                _snapshotHistory.Clear();
+            }
+
             snapshotCamera.targetTexture = renderTexture;
             snapshotCamera.Render();
 
-            // Copy to Texture2D
             RenderTexture.active = renderTexture;
             Texture2D snapshot = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
             snapshot.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
@@ -92,36 +98,66 @@ namespace Perspective
             RenderTexture.active = null;
             snapshotCamera.targetTexture = null;
 
-            // Show in UI
             snapshotDisplay.texture = snapshot;
 
-            _snapshotHistory.Add(snapshot);
+            var npcCounts = CountObjectsInView();
 
-            historyImageGrid.transform.GetChild(_snapshotHistory.Count - 1).GetComponent<RawImage>().texture = snapshot;
+            _snapshotHistory.Add(new SnapshotData(snapshot, npcCounts));
 
-            Debug.Log("📸 Snapshot taken!");
-            CountObjectsInView();
+            Debug.Log("📸 Snapshot stored with counts!");
         }
 
-        private void CountObjectsInView()
+
+        private Dictionary<NpcEvent, int> CountObjectsInView()
         {
-            var count = 0;
+            var npcCounts = new Dictionary<NpcEvent, int>();
+            var totalCount = 0;
 
             Collider[] hits = FindObjectsByType<Collider>(FindObjectsSortMode.None);
 
             foreach (var hit in hits)
             {
                 if ((eventLayer.value & (1 << hit.gameObject.layer)) == 0) continue;
-                Debug.Log(hit.gameObject.name);
-                Vector3 viewportPos = snapshotCamera.WorldToViewportPoint(hit.transform.position);
 
-                if (viewportPos is { z: > 0, x: >= 0 and <= 1, y: >= 0 and <= 1 })
-                {
-                    count++;
-                }
+                var viewportPos = snapshotCamera.WorldToViewportPoint(hit.transform.position);
+
+                if (viewportPos is not { z: > 0, x: >= 0 and <= 1, y: >= 0 and <= 1 }) continue;
+                
+                totalCount++;
+
+                var npc = hit.GetComponentInParent<NpcController>();
+                if (!npc) continue;
+                var npcEvent = npc.CurrentEvent;
+                npcCounts.TryAdd(npcEvent, 0);
+                npcCounts[npcEvent]++;
             }
 
-            Debug.Log("📸 Objects in snapshot: " + count);
+            Debug.Log($"📸 Objects in snapshot: {totalCount}");
+            foreach (var kvp in npcCounts)
+            {
+                Debug.Log($" - {kvp.Key}: {kvp.Value}");
+            }
+
+            return npcCounts;
+        }
+
+        private void SetUploadUI()
+        {
+            uploadUIEvent.RaiseEvent(true, _snapshotHistory);
+            _snapshotHistory.Clear();
+        }
+    }
+
+    [System.Serializable]
+    public class SnapshotData
+    {
+        public Texture2D image;
+        public Dictionary<NpcEvent, int> Counts;
+
+        public SnapshotData(Texture2D image, Dictionary<NpcEvent, int> counts)
+        {
+            this.image = image;
+            Counts = counts;
         }
     }
 }

@@ -33,6 +33,7 @@ namespace Perspective.Character.NPC.State
                 _conversationDuration -= Time.deltaTime;
                 if (_conversationDuration > 0) return;
                 NpcController.SwitchState(NpcController.NpcWalkingState);
+                NpcController.SetEventDetector(false);
             }
             else
             {
@@ -57,6 +58,7 @@ namespace Perspective.Character.NPC.State
             NpcController.Agent.isStopped = true;
             NpcController.Animator.Play("Talk");
             _conversationStarted = true;
+            NpcController.SetEventDetector(true);
         }
 
         public override void Exit()

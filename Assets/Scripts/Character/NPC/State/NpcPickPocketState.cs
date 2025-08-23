@@ -36,9 +36,14 @@ namespace Perspective.Character.NPC.State
             if (NpcController.Agent.pathPending ||
                 !(NpcController.Agent.remainingDistance <= NpcController.Agent.stoppingDistance)) return;
 
+            NpcController.OtherNpc.ForcedSetEvent(NpcEvent.PickPocket, NpcController);
+            NpcController.OtherNpc.SwitchState(NpcController.OtherNpc.NpcIdlingState);
+            
+            NpcController.SetEventDetector(true);
+            NpcController.OtherNpc.SetEventDetector(true);
+
             NpcController.Animator.Play("Steal");
             NpcController.Agent.isStopped = true;
-            NpcController.OtherNpc.SwitchState(NpcController.OtherNpc.NpcIdlingState);
         }
 
         public override void Exit()
@@ -52,6 +57,10 @@ namespace Perspective.Character.NPC.State
         {
             NpcController.OtherNpc.SwitchState(NpcController.OtherNpc.NpcYellState);
             NpcController.SwitchState(NpcController.NpcFleeState);
+            
+            // NpcController.SetEventDetector(false);
+            // NpcController.OtherNpc.SetEventDetector(false);
+
         }
     }
 }

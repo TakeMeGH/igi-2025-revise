@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
+  m_Name: TalkEvent
+  m_EditorClassIdentifier: 
+  npcEvent: 0
+  imageContext: Dua orang tampak sedang mengobrol santai di pinggir jalan.
+  examples:
+  - headline: Warga berdialog dengan aparat mengenai rencana pembangunan
+    output: 3
+  - headline: Pejabat daerah mengajak warga berdiskusi soal program penggusuran perkampungan
+    output: 2
+  - headline: Dua pria berbincang santai sambil minum kopi
+    output: 1
+  - headline: Harga BBM naik pekan depan menurut menteri
+    output: 0

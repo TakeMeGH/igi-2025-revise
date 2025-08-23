@@ -25,7 +25,12 @@ namespace Perspective.Character.NPC.State
             NpcController.Animator.Play("Intimidate");
 
             NpcController.isPunching = NpcController.MainFighter;
-            if (NpcController.MainFighter) _punchLimit = 3;
+            if (NpcController.MainFighter)
+            {
+                _punchLimit = 3;
+                NpcController.SetEventDetector(true);
+                NpcController.OtherNpc.SetEventDetector(true);
+            }
             else _punchLimit = -1;
 
             if (NpcController.isPunching) StartPunching();
@@ -60,6 +65,8 @@ namespace Perspective.Character.NPC.State
                 NpcController.transform.LookAt(NpcController.OtherNpc.transform.position);
 
                 NpcController.OtherNpc.SwitchState(NpcController.OtherNpc.NpcFleeState);
+                NpcController.SetEventDetector(false);
+                NpcController.OtherNpc.SetEventDetector(false);
                 return;
             }
 
