@@ -84,6 +84,7 @@ namespace Perspective.Character.NPC
         [Header("Intimidating Police Attributes")] [SerializeField] private float intimidatingPoliceRange;
         [SerializeField] private float intimidatingPoliceAngle;
         [SerializeField] private float nearToIntimidatingPoliceDistance;
+        [SerializeField] private bool isCiviliansScared;
 
         #endregion
 
@@ -144,8 +145,8 @@ namespace Perspective.Character.NPC
         public NpcOneSidedBlowsState NpcOneSidedBlowsState { get; private set; }
         public NpcKidnappingState NpcKidnappingState { get; private set; }
         public NpcFallenState NpcFallenState { get; private set; }
-        
         public NpcOneSidedKickDownState NpcOneSidedKickDownState { get; private set; }
+        public NpcGrafitiState NpcGrafitiState { get; private set; }
 
         #endregion
 
@@ -170,9 +171,10 @@ namespace Perspective.Character.NPC
             NpcKidnappingState = new NpcKidnappingState(this);
             NpcFallenState = new NpcFallenState(this);
             NpcOneSidedKickDownState = new NpcOneSidedKickDownState(this);
+            NpcGrafitiState = new NpcGrafitiState(this);
 
             identifierCollider.enabled = false;
-            
+
             Agent.avoidancePriority = UnityEngine.Random.Range(30, 70);
 
             var surfaces = GameObject.FindObjectsByType<NavMeshSurface>(FindObjectsSortMode.None);
@@ -220,7 +222,8 @@ namespace Perspective.Character.NPC
             {
                 NpcType.Beggar => NpcBeggingState,
                 NpcType.Merchant => NpcIdlingState,
-                _ => NpcWalkingState
+                NpcType.Grafiti => NpcGrafitiState,
+                    _ => NpcWalkingState
             });
         }
 
@@ -335,8 +338,10 @@ namespace Perspective.Character.NPC
                 other => other.NpcType == NpcType.Civilian,
                 other =>
                 {
-                    if (!other.SetEvent(NpcEvent.IntimidationPolice, this)) return;
-                    SetEvent(NpcEvent.IntimidationPolice, other);
+                    var nextEvent = NpcEvent.IntimidationPolice;
+                    if (isCiviliansScared) nextEvent = NpcEvent.IntimidationPoliceAndCivilianScared;
+                    if (!other.SetEvent(nextEvent, this)) return;
+                    SetEvent(nextEvent, other);
                 },
                 nearToIntimidatingPoliceDistance);
         }
@@ -416,6 +421,7 @@ namespace Perspective.Character.NPC
             OnNpcDestroyed = null;
             CancelInvoke();
         }
+
         public void SelfDestroy()
         {
             SelfReleased();

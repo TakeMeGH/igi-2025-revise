@@ -16,8 +16,8 @@ MonoBehaviour:
   - prefab: {fileID: 2880579469897927215, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
     maxCount: 7
     spawnWeight: 0.7
-    currentCount: 6
-  - prefab: {fileID: 1166254511700734734, guid: 12c457e74ee68a0409c82cbc2cc1e2ae, type: 3}
+    currentCount: 7
+  - prefab: {fileID: 8495046991789442523, guid: ed9953b67855ada4a9ef5819b7bc3ff6, type: 3}
     maxCount: 4
     spawnWeight: 0.7
     currentCount: 4

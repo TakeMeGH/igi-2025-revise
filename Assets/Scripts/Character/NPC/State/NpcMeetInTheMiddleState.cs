@@ -60,11 +60,24 @@ namespace Perspective.Character.NPC.State
             NpcController.Agent.isStopped = true;
             _meetInTheMiddleStarted = true;
             NpcController.SetEventDetector(true);
+            
+            NpcController.transform.LookAt(NpcController.OtherNpc.transform.position);
 
-            if (NpcController.CurrentEvent == NpcEvent.Conversation)
-                NpcController.Animator.Play("Talk");
-            else
-                NpcController.Animator.Play("Yell", 0, Random.Range(0, 2f));
+            switch (NpcController.CurrentEvent)
+            {
+                case NpcEvent.Conversation:
+                    NpcController.Animator.Play("Talk");
+                    break;
+                case NpcEvent.IntimidationPoliceAndCivilianScared when NpcController.NpcType == NpcType.Civilian:
+                    NpcController.Animator.Play("PeaceTalk");
+                    break;
+                case NpcEvent.IntimidationPoliceAndCivilianScared:
+                    NpcController.Animator.Play("Yell", 0, Random.Range(0, 2f));
+                    break;
+                default:
+                    NpcController.Animator.Play("Yell", 0, Random.Range(0, 2f));
+                    break;
+            }
         }
 
         public override void Exit()

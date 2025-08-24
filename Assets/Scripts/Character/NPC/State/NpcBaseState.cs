@@ -62,6 +62,7 @@ namespace Perspective.Character.NPC.State
                     if (NpcController.NpcType == NpcType.Collector)
                         NpcController.SwitchState(NpcController.NpcTrashTalkState);
                     break;
+                case NpcEvent.IntimidationPoliceAndCivilianScared:
                 case NpcEvent.IntimidationPolice:
                     NpcController.SwitchState(NpcController.NpcMeetInTheMiddleState);
                     break;

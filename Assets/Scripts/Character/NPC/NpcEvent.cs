@@ -10,10 +10,12 @@
         Intimidation,
         Fight,
         IntimidationPolice,
+        IntimidationPoliceAndCivilianScared,
         OneSidedBlowsByCivilians,
         PoliceKidnapCivilian,
         HardcoreRobbery,
         CivilianBeatdown,
-        ThugsWalkAround
+        ThugsWalkAround,
+        Grafiti
     }
 }

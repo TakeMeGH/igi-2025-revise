@@ -16,5 +16,6 @@
         HardcoreThief,
         BrutalPolice,
         Thugs,
+        Grafiti
     }
 }

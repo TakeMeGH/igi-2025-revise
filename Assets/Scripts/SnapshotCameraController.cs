@@ -64,7 +64,7 @@ namespace Perspective
             transform.position = new Vector3(mainCamera.transform.position.x,
                 mainCamera.transform.position.y, mainCamera.transform.position.z);
             transform.LookAt(worldPos);
-            
+
             snapshotCamera.fieldOfView = Mathf.Lerp(
                 snapshotCamera.fieldOfView,
                 targetFov,
@@ -76,6 +76,8 @@ namespace Perspective
         {
             cameraHUD.alpha = enableCamera ? 1 : 0;
             _isUsingCamera = enableCamera;
+
+            snapshotDisplay.texture = enableCamera ? renderTexture : null;
         }
 
         private void UseCamera()
@@ -101,21 +103,14 @@ namespace Perspective
                 ClearSnapshots();
             }
 
-            snapshotCamera.targetTexture = renderTexture;
-            snapshotCamera.Render();
-
             RenderTexture.active = renderTexture;
-            Texture2D snapshot = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
+            var snapshot = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
             snapshot.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
             snapshot.Apply();
 
             RenderTexture.active = null;
-            snapshotCamera.targetTexture = null;
-
-            snapshotDisplay.texture = snapshot;
 
             var npcCounts = CountObjectsInView();
-
             _snapshotHistory.Add(new SnapshotData(snapshot, npcCounts));
 
             Debug.Log("📸 Snapshot stored with counts!");

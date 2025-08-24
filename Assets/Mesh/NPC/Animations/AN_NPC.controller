@@ -127,7 +127,7 @@ AnimatorStateMachine:
     m_Position: {x: 840, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8301525649831565270}
-    m_Position: {x: -240, y: 410, z: 0}
+    m_Position: {x: 840, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5756830544919869423}
     m_Position: {x: 400, y: 190, z: 0}
@@ -136,7 +136,7 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1292127431266045121}
-    m_Position: {x: -240, y: 610, z: 0}
+    m_Position: {x: 620, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6752135483086762527}
     m_Position: {x: 400, y: 340, z: 0}
@@ -314,7 +314,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: peaceTalk
+  m_Name: PeaceTalk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -524,7 +524,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: graffiti
+  m_Name: Graffiti
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
