@@ -78,9 +78,11 @@ namespace Perspective.Utils
                     break;
                 case 4:
                     AudioManager.Instance.PlayMusic("Day4BGM");
+                    StartGame();
                     break;
                 case 5:
                     AudioManager.Instance.PlayMusic("Day5BGM");
+                    StartGame();
                     break;
                 default:
                     StartGame();

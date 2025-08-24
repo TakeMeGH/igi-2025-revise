@@ -1197,65 +1197,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &416637946
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 416637948}
-  - component: {fileID: 416637947}
-  m_Layer: 0
-  m_Name: Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &416637947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416637946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0907d471b88d294b8da6bde9043bbf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 1043035721}
-  - {fileID: 1057747722}
-  - {fileID: 732168937}
-  - {fileID: 1576821270}
-  spawnInterval: 1
-  spawnIntervalJitter: 2
-  spawnPointCooldown: 1
-  initialTrySpawn: 6
-  daySpawnTables:
-  - {fileID: 11400000, guid: 1cca8a0cdf4aaf34c96a81294214d8fe, type: 2}
-  - {fileID: 11400000, guid: 7cc7c7769c9fd294a81a46857a875384, type: 2}
-  - {fileID: 11400000, guid: dbdb1178cee0cbc4c823b6d2e9fa02ea, type: 2}
-  - {fileID: 11400000, guid: bc3e9ee3ec9c9d54ca0b807e6117f60b, type: 2}
-  - {fileID: 11400000, guid: 7272c3ab8e331d64ab05385a42a2ef2d, type: 2}
---- !u!4 &416637948
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416637946}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &473698041
 GameObject:
   m_ObjectHideFlags: 0
@@ -10920,7 +10861,7 @@ MonoBehaviour:
   - {fileID: 956318363}
   cameraHolder: {fileID: 961832807}
   player: {fileID: 826656444}
-  spawner: {fileID: 416637947}
+  spawner: {fileID: 0}
   inputReader: {fileID: 11400000, guid: 69ae5acc6a18fff408b10875e466a482, type: 2}
 --- !u!4 &1431429553
 Transform:
@@ -12327,7 +12268,6 @@ SceneRoots:
   - {fileID: 4615133755386095549}
   - {fileID: 1482897914}
   - {fileID: 75089830}
-  - {fileID: 416637948}
   - {fileID: 251833804219154597}
   - {fileID: 788161340}
   - {fileID: 1096894903}

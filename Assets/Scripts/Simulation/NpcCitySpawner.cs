@@ -18,13 +18,13 @@ namespace Perspective.Simulation
         [Header("Spawn Tables (index = day-1)")]
         [Tooltip("Assign up to 5 spawn tables (Day 1 = index 0, Day 2 = index 1, etc.)")]
         [SerializeField]
-        private NpcSpawnTable[] daySpawnTables = new NpcSpawnTable[5];
+        private NpcSpawnTable[] daySpawnTables = new NpcSpawnTable[15];
 
         private NpcSpawnTable activeSpawnTable;
         private Dictionary<Transform, float> spawnPointCooldowns;
         private Coroutine spawnCoroutine;
 
-        private void Awake()
+        private void Start()
         {
             int currentDay = DataManager.Instance != null ? DataManager.Instance.currentDay : 1;
             SetDay(currentDay); // initialize with DataManager
@@ -49,9 +49,10 @@ namespace Perspective.Simulation
                 return;
             }
 
+            Debug.Log(daySpawnTables.Length + " COUNT");
             activeSpawnTable = daySpawnTables[day - 1];
 
-            if (activeSpawnTable == null)
+            if (!activeSpawnTable)
             {
                 Debug.LogWarning($"No spawn table assigned for Day {day}.");
                 return;
