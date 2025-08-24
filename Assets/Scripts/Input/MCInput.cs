@@ -145,6 +145,15 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ZoomCamera"",
+                    ""type"": ""Value"",
+                    ""id"": ""f8ccbd8a-7306-4cb0-a8c0-4d10157e558d"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -356,6 +365,17 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                     ""action"": ""Upload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f92ac4d-07c0-4e51-96b2-e541b5db4d6c"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ZoomCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -459,6 +479,7 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         m_Gameplay_Camera = m_Gameplay.FindAction("Camera", throwIfNotFound: true);
         m_Gameplay_Snapshot = m_Gameplay.FindAction("Snapshot", throwIfNotFound: true);
         m_Gameplay_Upload = m_Gameplay.FindAction("Upload", throwIfNotFound: true);
+        m_Gameplay_ZoomCamera = m_Gameplay.FindAction("ZoomCamera", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CloseUpload = m_UI.FindAction("CloseUpload", throwIfNotFound: true);
@@ -549,6 +570,7 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Camera;
     private readonly InputAction m_Gameplay_Snapshot;
     private readonly InputAction m_Gameplay_Upload;
+    private readonly InputAction m_Gameplay_ZoomCamera;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -584,6 +606,10 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Upload".
         /// </summary>
         public InputAction @Upload => m_Wrapper.m_Gameplay_Upload;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/ZoomCamera".
+        /// </summary>
+        public InputAction @ZoomCamera => m_Wrapper.m_Gameplay_ZoomCamera;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -628,6 +654,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @Upload.started += instance.OnUpload;
             @Upload.performed += instance.OnUpload;
             @Upload.canceled += instance.OnUpload;
+            @ZoomCamera.started += instance.OnZoomCamera;
+            @ZoomCamera.performed += instance.OnZoomCamera;
+            @ZoomCamera.canceled += instance.OnZoomCamera;
         }
 
         /// <summary>
@@ -657,6 +686,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @Upload.started -= instance.OnUpload;
             @Upload.performed -= instance.OnUpload;
             @Upload.canceled -= instance.OnUpload;
+            @ZoomCamera.started -= instance.OnZoomCamera;
+            @ZoomCamera.performed -= instance.OnZoomCamera;
+            @ZoomCamera.canceled -= instance.OnZoomCamera;
         }
 
         /// <summary>
@@ -900,6 +932,13 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUpload(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ZoomCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnZoomCamera(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

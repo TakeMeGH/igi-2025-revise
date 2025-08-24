@@ -11,6 +11,11 @@ namespace Perspective
     {
         [Header("Settings")] [SerializeField] private bool isEnabled;
 
+        [Header("Zoom Settings")] [SerializeField] private float zoomSpeed = 5f;
+        [SerializeField] private float minFov = 20f;
+        [SerializeField] private float maxFov = 60f;
+        private float targetFov;
+
         [Header("Input")] [SerializeField] private InputReader inputReader;
         [SerializeField] private UploadUIEvent uploadUIEvent;
 
@@ -32,6 +37,7 @@ namespace Perspective
             inputReader.CameraEvent += UseCamera;
             inputReader.SnapshotEvent += TakeSnapshot;
             inputReader.UploadEvent += SetUploadUI;
+            inputReader.ZoomCameraEvent += OnZoom;
         }
 
         private void OnDisable()
@@ -39,11 +45,13 @@ namespace Perspective
             inputReader.CameraEvent -= UseCamera;
             inputReader.SnapshotEvent -= TakeSnapshot;
             inputReader.UploadEvent -= SetUploadUI;
+            inputReader.ZoomCameraEvent -= OnZoom;
         }
 
         private void Start()
         {
             SetCamera(isEnabled);
+            targetFov = snapshotCamera.fieldOfView;
         }
 
         private void Update()
@@ -56,6 +64,12 @@ namespace Perspective
             transform.position = new Vector3(mainCamera.transform.position.x,
                 mainCamera.transform.position.y, mainCamera.transform.position.z);
             transform.LookAt(worldPos);
+            
+            snapshotCamera.fieldOfView = Mathf.Lerp(
+                snapshotCamera.fieldOfView,
+                targetFov,
+                Time.deltaTime * zoomSpeed
+            );
         }
 
         private void SetCamera(bool enableCamera)
@@ -155,6 +169,14 @@ namespace Perspective
             }
 
             _snapshotHistory.Clear();
+        }
+
+        private void OnZoom(float scrollValue)
+        {
+            if (!_isUsingCamera) return;
+
+            targetFov -= scrollValue * zoomSpeed;
+            targetFov = Mathf.Clamp(targetFov, minFov, maxFov);
         }
     }
 

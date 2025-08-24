@@ -13,6 +13,7 @@
         OneSidedBlowsByCivilians,
         PoliceKidnapCivilian,
         HardcoreRobbery,
-        CivilianBeatdown
+        CivilianBeatdown,
+        ThugsWalkAround
     }
 }

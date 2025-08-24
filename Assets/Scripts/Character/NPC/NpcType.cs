@@ -15,5 +15,6 @@
         PoliceKidnapper,
         HardcoreThief,
         BrutalPolice,
+        Thugs,
     }
 }

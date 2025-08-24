@@ -11,6 +11,7 @@ namespace Perspective.Input
 
         public Action<Vector2> MoveEvent;
         public Action<Vector2> LookEvent;
+        public Action<float> ZoomCameraEvent;
         public Action InteractEvent;
         public Action CameraEvent;
         public Action SnapshotEvent;
@@ -103,6 +104,14 @@ namespace Perspective.Input
             {
                 UploadEvent?.Invoke();
             }
+        }
+
+        public void OnZoomCamera(InputAction.CallbackContext context)
+        {
+            if (context.phase != InputActionPhase.Performed) return;
+
+            var value = context.ReadValue<float>();
+            ZoomCameraEvent?.Invoke(value);
         }
 
         #endregion
