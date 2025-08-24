@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Perspective.Character.NPC;
 using Perspective.Utils;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -61,6 +62,15 @@ namespace Perspective.UI
                     commentsPrompt = stance == "tidak relevan"
                         ? ChatBotUtils.Instance.BuildNoneEventCommentsPrompt()
                         : ChatBotUtils.Instance.BuildCommentsPrompt(stance);
+
+                    if (stance == "pro rakyat")
+                    {
+                        DataManager.Instance.AddReputation(-1);
+                    }
+                    else if (stance == "pro pemerintah")
+                    {
+                        DataManager.Instance.AddReputation(1);
+                    }
                 }
 
                 var answer = await ChatBotUtils.Instance.AskBot(commentsPrompt, description.text);

@@ -149,7 +149,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -283,13 +283,31 @@ MonoBehaviour:
   sfxSource: {fileID: 7853494168829333896}
   soundEntries:
   - key: MainMenuBGM
-    clip: {fileID: 8300000, guid: 203d090fb2cf0d14590b623a7a19a068, type: 3}
+    clip: {fileID: 8300000, guid: 89ce8cbbf678c5e4d873fddf7c9f4507, type: 3}
   - key: Day1BGM
-    clip: {fileID: 8300000, guid: e6bc3564117ba6842b65dd41d3977b54, type: 3}
+    clip: {fileID: 8300000, guid: 0b05ab1ff6198c443a091b5c9d9b10fc, type: 3}
   - key: Day2BGM
-    clip: {fileID: 8300000, guid: 84d316146da3dde41be2932f920db97f, type: 3}
+    clip: {fileID: 8300000, guid: db611907e7859c947900958ed27d29b0, type: 3}
   - key: Day3BGM
     clip: {fileID: 8300000, guid: b7dc5f09e35772c44b30360ee06c2ee0, type: 3}
+  - key: Day4BGM
+    clip: {fileID: 8300000, guid: 0470fd5da170ec3449b19e98cb103695, type: 3}
+  - key: Day5BGM
+    clip: {fileID: 8300000, guid: 1fc5830f9ea5c0340acb66eae1cce376, type: 3}
+  - key: BackToMainMenu
+    clip: {fileID: 8300000, guid: ea74631d44e91ee45aa468b7f19f25ab, type: 3}
+  - key: TakePicture
+    clip: {fileID: 8300000, guid: a1b425665366f91439d3ec34f7c2054d, type: 3}
+  - key: DesahKesakitan
+    clip: {fileID: 8300000, guid: d9f98fc7dbb87084e81f82200797bd51, type: 3}
+  - key: KetukPintu
+    clip: {fileID: 8300000, guid: 00ff2d5db917590469d80692962ef654, type: 3}
+  - key: PhoneRingging
+    clip: {fileID: 8300000, guid: bbea37bf8c728784985c1501cb364ed4, type: 3}
+  - key: SuaraOutdoor
+    clip: {fileID: 8300000, guid: bbea37bf8c728784985c1501cb364ed4, type: 3}
+  - key: SuaraTembakan
+    clip: {fileID: 8300000, guid: 59ac7a81d83589d4ba7236016dc8b863, type: 3}
 --- !u!1 &7163946237195216480
 GameObject:
   m_ObjectHideFlags: 0

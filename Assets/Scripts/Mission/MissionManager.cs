@@ -1,18 +1,43 @@
 using Perspective.Character.NPC;
+using Perspective.UI;
+using Perspective.Utils;
 using UnityEngine;
 
 namespace Perspective.Mission
 {
     public class MissionManager : MonoBehaviour
     {
-        [SerializeField] private MissionData currentMission;
+        [Header("Missions (index = day-1)")]
+        [Tooltip("Assign up to 5 mission data assets (Day 1 = index 0, Day 2 = index 1, etc.)")]
+        [SerializeField] private MissionData[] dayMissions = new MissionData[5];
 
+        private MissionData currentMission;
         public MissionData CurrentMission => currentMission;
+        [SerializeField] private MissionController missionController;
 
         private void Start()
         {
-            if (currentMission != null)
-                ResetMission();
+            int currentDay = DataManager.Instance != null ? DataManager.Instance.currentDay : 1;
+            SetDayMission(currentDay);
+            missionController.ShowMission(currentMission);
+        }
+
+        private void SetDayMission(int day)
+        {
+            if (day < 1 || day > 5)
+            {
+                Debug.LogWarning("Day must be between 1 and 5!");
+                return;
+            }
+
+            currentMission = dayMissions[day - 1];
+            if (currentMission == null)
+            {
+                Debug.LogWarning($"No mission assigned for Day {day}");
+                return;
+            }
+
+            ResetMission();
         }
 
         public void ResetMission()

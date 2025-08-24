@@ -40,15 +40,20 @@ namespace Perspective.Utils
                     if (counter == 1) levelManager.PlayTimeline("Day2/TL_Day2_2");
                     break;
                 case 3:
-                    // if (counter == 1) levelManager.PlayTimeline("Day3/TL_Day3_2");
-                    if (counter == 1) levelManager.PlayTimeline("Day3/TL_Day3_2pt2");
+                    if (DataManager.Instance.GetReputation() > 0) levelManager.PlayTimeline("Day3/TL_Day3_2");
+                    else if (DataManager.Instance.GetReputation() < 0) levelManager.PlayTimeline("Day3/TL_Day3_2pt2");
                     break;
                 case 5:
-                    // if (counter == 1) Invoke(nameof(CallDialogue), 0.1f);
-                    // if (counter == 2) levelManager.PlayTimeline("Day5/TL_Day5_2pt2");
-
-                    if (counter == 1) levelManager.PlayTimeline("Day5/TL_Day5_2");
-                    if (counter == 2) levelManager.PlayTimeline("TL_TransitionFinishGame");
+                    if (DataManager.Instance.GetReputation() > 0)
+                    {
+                        if (counter == 1) levelManager.PlayTimeline("Day5/TL_Day5_2");
+                        if (counter == 2) levelManager.PlayTimeline("TL_TransitionFinishGame");
+                    }
+                    else if (DataManager.Instance.GetReputation() < 0)
+                    {
+                        if (counter == 1) Invoke(nameof(CallDialogue), 0.1f);
+                        if (counter == 2) levelManager.PlayTimeline("Day5/TL_Day5_2pt2");
+                    }
                     break;
                 default:
                     break;
