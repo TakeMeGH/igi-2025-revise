@@ -46,13 +46,9 @@ namespace Perspective.Utils
                 case 5:
                     // if (counter == 1) Invoke(nameof(CallDialogue), 0.1f);
                     // if (counter == 2) levelManager.PlayTimeline("Day5/TL_Day5_2pt2");
-                    
+
                     if (counter == 1) levelManager.PlayTimeline("Day5/TL_Day5_2");
-                    if (counter == 2)
-                    {
-                        levelManager.TransitionNextDay();
-                        levelManager.FinishGame();
-                    }
+                    if (counter == 2) levelManager.PlayTimeline("TL_TransitionFinishGame");
                     break;
                 default:
                     break;

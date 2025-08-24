@@ -4799,7 +4799,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 8.744019, y: 4.2210083}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &802346534
@@ -11791,7 +11791,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1431429551}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 9fb92dce8688ad94f86697e150fb92b6, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 2dfa94afadd82e9429c32fb9b64f1ebe, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -11875,6 +11875,10 @@ PlayableDirector:
     value: {fileID: 29015071}
   - key: {fileID: 2844727601897366550, guid: 84f4e27d4e526ab4cb91980dbda1ab57, type: 2}
     value: {fileID: 1192290447}
+  - key: {fileID: 5560507074266684647, guid: 2e4fab03c959f7e449bc37519c270e06, type: 2}
+    value: {fileID: 802346535}
+  - key: {fileID: 2844727601897366550, guid: 2e4fab03c959f7e449bc37519c270e06, type: 2}
+    value: {fileID: 1431429555}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1431429555
@@ -11894,6 +11898,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 13a5db11c68b27f4db1b04d48d8ce4f5, type: 2}
     - {fileID: 11400000, guid: 5b4b679181526374e915c1df20b10848, type: 2}
     - {fileID: 11400000, guid: 0d2f066eb12fcf04aad3d318efe32cf8, type: 2}
+    - {fileID: 11400000, guid: 8f6c37ad999e2b44e932a598bb93d21e, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -11914,6 +11919,20 @@ MonoBehaviour:
         - m_Target: {fileID: 1431429552}
           m_TargetAssemblyTypeName: Perspective.Utils.LevelManager, Assembly-CSharp
           m_MethodName: GoNextDay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1431429552}
+          m_TargetAssemblyTypeName: Perspective.Utils.LevelManager, Assembly-CSharp
+          m_MethodName: FinishGame
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
