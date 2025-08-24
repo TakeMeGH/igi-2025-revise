@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using OpenAI;
 using Perspective.CameraController;
 using Perspective.Character.NPC;
+using Perspective.UI;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Perspective.Utils
 {
@@ -16,13 +18,61 @@ namespace Perspective.Utils
         private OpenAIApi _openai;
         private readonly List<ChatMessage> _messages = new();
 
+        private readonly string _encodedKey =
+            "c2stcHJvai1PRTVKcEpibDROR0pQWkJZZWU4WDFtS3NuT0U3TFNOR28xbFJrZ1h6dUV2VkFKMGtfT2VqbWw2bXRsYVQwZ2JMU3ZXUlBaeGphLVQzQmxia0ZKZU53ZGdHM2xVaUVPMDlONi1ITE01TlB0LWEzVUFoLUNKX3lMdndONWpRLXFGN3BrVWcxM1BCQVluclVVejFVbzZwTzdGUk10UUE=";
+
+        private string GetApiKey()
+        {
+            return Encoding.UTF8.GetString(Convert.FromBase64String(_encodedKey));
+        }
+
         protected override void OwnAwake()
         {
-            _openai = new OpenAIApi();
+            _openai = new OpenAIApi(GetApiKey());
+        }
+
+        private async Task WaitUntilConnected()
+        {
+            var pauseController = FindAnyObjectByType<PauseMenuController>();
+            if (pauseController)
+            {
+                pauseController.SetPause(true);
+            }
+
+            Debug.Log("⏸ Game paused. Waiting for internet...");
+
+            while (!await HasInternetConnection())
+            {
+                await Task.Delay(2000);
+            }
+
+            if (pauseController)
+            {
+                pauseController.SetPause(false);
+            }
+
+            Debug.Log("▶ Internet restored. Game resumed!");
+        }
+
+        private async Task<bool> HasInternetConnection()
+        {
+            using var request = UnityWebRequest.Head("https://www.google.com");
+            request.timeout = 5;
+            var asyncOp = request.SendWebRequest();
+
+            while (!asyncOp.isDone)
+                await Task.Yield();
+
+            return request.result == UnityWebRequest.Result.Success;
         }
 
         public async Task<string> AskBot(string prompt, string userMessage)
         {
+            if (!await HasInternetConnection())
+            {
+                await WaitUntilConnected();
+            }
+
             _messages.Clear();
             _messages.Add(new ChatMessage()
             {
@@ -97,7 +147,7 @@ Tugas Anda adalah membuat 15 komentar singkat dan alami berdasarkan judul berita
 - dst.
 ";
         }
-        
+
         public string BuildNoneEventCommentsPrompt()
         {
             return @"

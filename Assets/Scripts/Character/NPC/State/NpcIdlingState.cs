@@ -16,7 +16,12 @@ namespace Perspective.Character.NPC.State
 
             _idleDuration = Random.Range(2f, 6f);
 
-            NpcController.Animator.Play("Idle/Walk");
+            if (NpcController.NpcType == NpcType.Thief || NpcController.NpcType == NpcType.ThugsWalkAround)
+            {
+                NpcController.Animator.Play("Smoke");
+            }
+            else NpcController.Animator.Play("Idle/Walk");
+
             NpcController.Animator.SetFloat(Speed, 0.0f);
         }
 

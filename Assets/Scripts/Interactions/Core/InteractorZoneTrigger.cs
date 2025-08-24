@@ -12,7 +12,6 @@ namespace Perspective.Interactions.Core
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other);
             if (other.TryGetComponent(out IInteractable currentInteraction))
             {
                 enterZone.Invoke(true, currentInteraction);

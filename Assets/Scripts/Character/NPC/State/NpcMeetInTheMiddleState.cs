@@ -65,6 +65,7 @@ namespace Perspective.Character.NPC.State
 
             switch (NpcController.CurrentEvent)
             {
+                case NpcEvent.ConversationPoliceAndThugs:
                 case NpcEvent.Conversation:
                     NpcController.Animator.Play("Talk");
                     break;
@@ -72,10 +73,10 @@ namespace Perspective.Character.NPC.State
                     NpcController.Animator.Play("PeaceTalk");
                     break;
                 case NpcEvent.IntimidationPoliceAndCivilianScared:
-                    NpcController.Animator.Play("Yell", 0, Random.Range(0, 2f));
+                    NpcController.Animator.Play("Intimidate", 0, Random.Range(0, 1f));
                     break;
                 default:
-                    NpcController.Animator.Play("Yell", 0, Random.Range(0, 2f));
+                    NpcController.Animator.Play("Intimidate", 0, Random.Range(0, 1f));
                     break;
             }
         }

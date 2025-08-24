@@ -1,4 +1,5 @@
 using System;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,18 +17,21 @@ namespace Perspective.Input
         public Action CameraEvent;
         public Action SnapshotEvent;
         public Action UploadEvent;
+        public Action PauseEvent;
 
         #endregion
 
         #region UI
 
-        public Action UnPausePerformed;
+        public Action UnPauseEvent;
         public Action CloseUploadEvent;
 
         #endregion
 
 
         private MCInput _mcInput;
+        private bool isEnableGameplayBefore;
+        private bool isEnableGameplayNow;
 
         void OnEnable()
         {
@@ -39,6 +43,8 @@ namespace Perspective.Input
             }
 
             EnableGameplayInput();
+            isEnableGameplayBefore = true;
+            isEnableGameplayNow = true;
         }
 
         void OnDisable()
@@ -52,6 +58,8 @@ namespace Perspective.Input
             _mcInput.UI.Disable();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            isEnableGameplayBefore = isEnableGameplayNow;
+            isEnableGameplayNow = true;
         }
 
         public void EnableUIInput()
@@ -60,6 +68,14 @@ namespace Perspective.Input
             _mcInput.UI.Enable();
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+            isEnableGameplayBefore = isEnableGameplayNow;
+            isEnableGameplayNow = true;
+        }
+
+        public void EnableInputBefore()
+        {
+            if(isEnableGameplayBefore) EnableGameplayInput();
+            else EnableUIInput();
         }
 
         #region Gameplay
@@ -84,7 +100,7 @@ namespace Perspective.Input
 
         public void OnCamera(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed)
+            if (context.phase == InputActionPhase.Canceled)
             {
                 CameraEvent?.Invoke();
             }
@@ -92,7 +108,7 @@ namespace Perspective.Input
 
         public void OnSnapshot(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed)
+            if (context.phase == InputActionPhase.Canceled)
             {
                 SnapshotEvent?.Invoke();
             }
@@ -114,15 +130,31 @@ namespace Perspective.Input
             ZoomCameraEvent?.Invoke(value);
         }
 
+        public void OnPause(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                PauseEvent?.Invoke();
+            }
+        }
+
         #endregion
 
         #region UI
 
         public void OnCloseUpload(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed)
+            if (context.phase == InputActionPhase.Canceled)
             {
                 CloseUploadEvent?.Invoke();
+            }
+        }
+
+        public void OnUnPause(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Canceled)
+            {
+                UnPauseEvent?.Invoke();
             }
         }
 

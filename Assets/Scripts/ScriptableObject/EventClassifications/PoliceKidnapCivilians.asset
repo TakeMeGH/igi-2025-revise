@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
+  m_Name: PoliceKidnapCivilians
+  m_EditorClassIdentifier: 
+  npcEvent: 10
+  imageContext: Seorang warga dipukul oleh polisi hingga pingsan, kemudian diculik.
+  examples:
+  - headline: Warga jadi korban kekerasan aparat dan dibawa paksa, masyarakat marah
+    output: 3
+  - headline: Aparat menegakkan hukum tegas terhadap kerusuhan yang terjadi
+    output: 2
+  - headline: "Seorang warga terlihat pingsan setelah bentrokan dengan polisi\r"
+    output: 1
+  - headline: Festival kota berlangsung meriah, warga ramai berkunjung
+    output: 0
+  - headline: Polisi bertindak sewenang-wenang, warga tak berdaya saat dipukul dan
+      dibawa pergi
+    output: 3
+  - headline: Aparat mengamankan provokator yang membuat kericuhan di tengah masyarakat
+    output: 2
+  - headline: Insiden terjadi antara polisi dan seorang warga, belum ada informasi
+      lanjutan
+    output: 1
+  - headline: Cuaca cerah diprediksi berlangsung sepanjang akhir pekan
+    output: 1

@@ -38,11 +38,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 564662256218954231, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
       propertyPath: nearToBrawlDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2880579469897927215, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
       propertyPath: m_Name
-      value: Brawler
+      value: BrawlerA
       objectReference: {fileID: 0}
     - target: {fileID: 3220653625160028309, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
       propertyPath: m_LocalPosition.x

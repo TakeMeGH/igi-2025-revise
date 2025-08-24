@@ -145,7 +145,7 @@ AnimatorStateMachine:
     m_Position: {x: 620, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4033117767581709071}
-    m_Position: {x: -240, y: 760, z: 0}
+    m_Position: {x: 620, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2613710741950682355}
     m_Position: {x: 840, y: 190, z: 0}
@@ -157,7 +157,7 @@ AnimatorStateMachine:
     m_Position: {x: 620, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8683806642182136617}
-    m_Position: {x: -20, y: 510, z: 0}
+    m_Position: {x: 400, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3825113035010941462}
     m_Position: {x: 400, y: 290, z: 0}
@@ -420,7 +420,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: punchDown
+  m_Name: PunchDown
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -550,7 +550,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: smoke
+  m_Name: Smoke
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

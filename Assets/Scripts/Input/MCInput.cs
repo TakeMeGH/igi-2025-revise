@@ -154,6 +154,15 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""b08540fb-7f61-43d9-90e6-495a18d9c12a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -336,7 +345,7 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a9d018d8-7882-4b45-a7c7-bcfaf0c67b6b"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -357,23 +366,23 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4b6eaa85-4119-448c-8146-7d04d2df7104"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Upload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0f92ac4d-07c0-4e51-96b2-e541b5db4d6c"",
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ZoomCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""482dc97a-03a4-4fe8-899f-8b287509b0e3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -391,17 +400,26 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UnPause"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef2d5fd5-309e-4a0d-a673-2b45cefe7315"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""f044aedb-ca6c-4412-92ba-18bc896ee07b"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""id"": ""117175fa-ab87-4ce1-8145-17c2db54a94c"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CloseUpload"",
+                    ""action"": ""UnPause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -480,9 +498,11 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         m_Gameplay_Snapshot = m_Gameplay.FindAction("Snapshot", throwIfNotFound: true);
         m_Gameplay_Upload = m_Gameplay.FindAction("Upload", throwIfNotFound: true);
         m_Gameplay_ZoomCamera = m_Gameplay.FindAction("ZoomCamera", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CloseUpload = m_UI.FindAction("CloseUpload", throwIfNotFound: true);
+        m_UI_UnPause = m_UI.FindAction("UnPause", throwIfNotFound: true);
     }
 
     ~@MCInput()
@@ -571,6 +591,7 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Snapshot;
     private readonly InputAction m_Gameplay_Upload;
     private readonly InputAction m_Gameplay_ZoomCamera;
+    private readonly InputAction m_Gameplay_Pause;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -610,6 +631,10 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/ZoomCamera".
         /// </summary>
         public InputAction @ZoomCamera => m_Wrapper.m_Gameplay_ZoomCamera;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -657,6 +682,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @ZoomCamera.started += instance.OnZoomCamera;
             @ZoomCamera.performed += instance.OnZoomCamera;
             @ZoomCamera.canceled += instance.OnZoomCamera;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         /// <summary>
@@ -689,6 +717,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @ZoomCamera.started -= instance.OnZoomCamera;
             @ZoomCamera.performed -= instance.OnZoomCamera;
             @ZoomCamera.canceled -= instance.OnZoomCamera;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         /// <summary>
@@ -727,6 +758,7 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_CloseUpload;
+    private readonly InputAction m_UI_UnPause;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -742,6 +774,10 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/CloseUpload".
         /// </summary>
         public InputAction @CloseUpload => m_Wrapper.m_UI_CloseUpload;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/UnPause".
+        /// </summary>
+        public InputAction @UnPause => m_Wrapper.m_UI_UnPause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -771,6 +807,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @CloseUpload.started += instance.OnCloseUpload;
             @CloseUpload.performed += instance.OnCloseUpload;
             @CloseUpload.canceled += instance.OnCloseUpload;
+            @UnPause.started += instance.OnUnPause;
+            @UnPause.performed += instance.OnUnPause;
+            @UnPause.canceled += instance.OnUnPause;
         }
 
         /// <summary>
@@ -785,6 +824,9 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
             @CloseUpload.started -= instance.OnCloseUpload;
             @CloseUpload.performed -= instance.OnCloseUpload;
             @CloseUpload.canceled -= instance.OnCloseUpload;
+            @UnPause.started -= instance.OnUnPause;
+            @UnPause.performed -= instance.OnUnPause;
+            @UnPause.canceled -= instance.OnUnPause;
         }
 
         /// <summary>
@@ -939,6 +981,13 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnZoomCamera(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -954,5 +1003,12 @@ public partial class @MCInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCloseUpload(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UnPause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUnPause(InputAction.CallbackContext context);
     }
 }

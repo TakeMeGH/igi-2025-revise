@@ -23,3 +23,11 @@ MonoBehaviour:
     output: 1
   - headline: Langit cerah, warga ramai belanja kebutuhan sehari-hari
     output: 1
+  - headline: "Preman meresahkan, pedagang kecil jadi korban\r"
+    output: 3
+  - headline: Aksi premanisme kembali terjadi di kawasan pasar
+    output: 1
+  - headline: Polisi janji tindak tegas preman yang intimidasi pedagang
+    output: 2
+  - headline: Cuaca cerah membuat pasar ramai pengunjung
+    output: 0

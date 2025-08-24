@@ -13,11 +13,27 @@ MonoBehaviour:
   m_Name: TempSpawnTable2
   m_EditorClassIdentifier: 
   entries:
-  - prefab: {fileID: 2880579469897927215, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
+  - prefabs:
+    - {fileID: 2880579469897927215, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
     maxCount: 7
     spawnWeight: 0.7
     currentCount: 7
-  - prefab: {fileID: 8495046991789442523, guid: ed9953b67855ada4a9ef5819b7bc3ff6, type: 3}
+    nextPrefabIndex: 0
+  - prefabs:
+    - {fileID: 2813701415952976556, guid: ed54b69c8530e4649bd6cfc541651391, type: 3}
     maxCount: 4
     spawnWeight: 0.7
     currentCount: 4
+    nextPrefabIndex: 0
+  - prefabs:
+    - {fileID: 2813701415952976556, guid: 739b329be5254d340ac1438a474e4fd7, type: 3}
+    maxCount: 4
+    spawnWeight: 0.7
+    currentCount: 4
+    nextPrefabIndex: 0
+  - prefabs:
+    - {fileID: 6825149887925808480, guid: 917d01221cd64cd4690f1f7a1a895202, type: 3}
+    maxCount: 4
+    spawnWeight: 0.7
+    currentCount: 4
+    nextPrefabIndex: 0

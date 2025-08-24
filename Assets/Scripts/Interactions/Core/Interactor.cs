@@ -50,7 +50,7 @@ namespace Perspective.Interactions.Core
             _potentialInteractions.RemoveAll(item => item == null || !(item as MonoBehaviour));
 
             _closestInteractable = null;
-            float closestDistance = float.MaxValue;
+            var closestDistance = float.MaxValue;
 
             foreach (var potential in _potentialInteractions)
             {

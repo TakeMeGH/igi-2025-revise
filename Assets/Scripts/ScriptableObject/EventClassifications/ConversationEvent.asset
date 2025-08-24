@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
-  m_Name: TalkEvent
+  m_Name: ConversationEvent
   m_EditorClassIdentifier: 
-  npcEvent: 0
+  npcEvent: 2
   imageContext: Dua orang tampak sedang mengobrol santai di pinggir jalan.
   examples:
   - headline: Warga berdialog dengan aparat mengenai rencana pembangunan
@@ -22,4 +22,14 @@ MonoBehaviour:
   - headline: Dua pria berbincang santai sambil minum kopi
     output: 1
   - headline: Harga BBM naik pekan depan menurut menteri
+    output: 0
+  - headline: "Dua warga terlihat bercengkrama di pinggir jalan\r"
+    output: 1
+  - headline: 'Masyarakat menjaga keakraban lewat obrolan santai sehari-hari
+
+'
+    output: 3
+  - headline: Pemerintah daerah apresiasi warga yang menjaga suasana rukun
+    output: 2
+  - headline: Jalanan padat merayap di sore hari
     output: 0

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
+  m_Name: IntimidationsPoliceButCiviliansScared
+  m_EditorClassIdentifier: 
+  npcEvent: 9
+  imageContext: Polisi terlihat mengintimidasi warga, dan warga tampak ketakutan
+    atau mundur pasif di jalan.
+  examples:
+  - headline: Warga tampak takut menghadapi aparat yang sedang bertindak tegas
+    output: 3
+  - headline: Polisi menunjukkan ketegasan untuk menertibkan situasi yang rawan
+    output: 2
+  - headline: Beberapa warga terlihat mundur saat aparat mendekat
+    output: 1
+  - headline: Pasar tradisional ramai dikunjungi pembeli hari ini
+    output: 0
+  - headline: Aparat hanya berusaha mengendalikan situasi agar tetap tertib
+    output: 2
+  - headline: "Sejumlah warga memilih mundur saat aparat datang\r"
+    output: 1
+  - headline: Polisi harusnya lindungi, bukan malah bikin warga takut
+    output: 3
+  - headline: "Pihak kepolisian menyebut tindakan tegas untuk menjaga ketertiban\r"
+    output: 2
+  - headline: Miris, masyarakat jadi korban intimidasi aparat
+    output: 3
+  - headline: Warga terlihat tidak berani melawan, hanya bisa mundur
+    output: 1
+  - headline: 'Harga kebutuhan pokok naik lagi minggu ini
+
+'
+    output: 0

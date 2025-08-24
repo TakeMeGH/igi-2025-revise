@@ -25,6 +25,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 564662256218954231, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
+      propertyPath: isThisSide
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 564662256218954231, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
       propertyPath: brawlTarget
       value: 5
       objectReference: {fileID: 0}

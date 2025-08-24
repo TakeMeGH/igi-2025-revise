@@ -2640,9 +2640,11 @@ MonoBehaviour:
   brawlTarget: 6
   brawlEvent: 6
   isPunching: 0
+  isThisSide: 0
   intimidatingPoliceRange: 0
   intimidatingPoliceAngle: 0
   nearToIntimidatingPoliceDistance: 0
+  isCiviliansScared: 0
   punchRange: 0
   punchAngle: 0
   nearToPunchDistance: 0
@@ -2680,7 +2682,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 2
+  m_ObstacleAvoidanceType: 0
 --- !u!65 &1808136986503907257
 BoxCollider:
   m_ObjectHideFlags: 0

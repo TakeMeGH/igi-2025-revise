@@ -16,6 +16,8 @@
         HardcoreRobbery,
         CivilianBeatdown,
         ThugsWalkAround,
-        Grafiti
+        Grafiti,
+        CiviliansVsPolice,
+        ConversationPoliceAndThugs
     }
 }

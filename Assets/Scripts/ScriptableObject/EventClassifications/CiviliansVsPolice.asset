@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
+  m_Name: CiviliansVsPolice
+  m_EditorClassIdentifier: 
+  npcEvent: 15
+  imageContext: "Terjadi bentrokan fisik antara warga dan polisi, beberapa pihak
+    memukul satu sama lain.\r"
+  examples:
+  - headline: Warga berani melawan tindakan aparat, menimbulkan kericuhan di jalan
+    output: 3
+  - headline: Polisi bertindak tegas untuk mengendalikan keributan antara warga dan
+      aparat
+    output: 2
+  - headline: Beberapa warga dan polisi terlibat perkelahian kecil di pusat kota
+    output: 1
+  - headline: Festival kuliner berlangsung meriah di pusat kota
+    output: 0

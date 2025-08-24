@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
   m_Name: FightEvent
   m_EditorClassIdentifier: 
-  npcEvent: 7
+  npcEvent: 6
   imageContext: Dua orang terlihat sedang berantem di jalan
   examples:
   - headline: Polisi segera melerai perkelahian di jalan raya
@@ -22,4 +22,12 @@ MonoBehaviour:
   - headline: Pertikaian dua pria membuat jalanan sempat macet
     output: 1
   - headline: Festival kuliner berlangsung meriah di pusat kota
+    output: 0
+  - headline: Dua pria adu jotos di jalan raya hingga bikin macet
+    output: 1
+  - headline: Polisi berjanji akan menindak tegas aksi tawuran dan perkelahian jalanan
+    output: 2
+  - headline: Masyarakat mengutuk aksi kekerasan di jalan umum
+    output: 3
+  - headline: Ada festival jajanan bango
     output: 0

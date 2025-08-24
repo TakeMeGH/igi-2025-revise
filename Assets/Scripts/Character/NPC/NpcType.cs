@@ -15,7 +15,7 @@
         PoliceKidnapper,
         HardcoreThief,
         BrutalPolice,
-        Thugs,
+        ThugsWalkAround,
         Grafiti
     }
 }

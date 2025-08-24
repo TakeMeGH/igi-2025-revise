@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
+  m_Name: ConversationPoliceAndThugs
+  m_EditorClassIdentifier: 
+  npcEvent: 16
+  imageContext: Preman dan polisi terlihat berdiskusi secara mencurigakan, seperti
+    ada kongkalikong
+  examples:
+  - headline: Preman terlihat bebas bernegosiasi dengan aparat, warga mulai curiga
+    output: 3
+  - headline: Warga mengeluhkan aksi preman yang diduga dilindungi polisi
+    output: 3
+  - headline: "Preman dan polisi tampak akur di jalan, bikin masyarakat resah\r"
+    output: 3
+  - headline: Polisi dan preman berbincang di area publik, belum ada klarifikasi
+      resmi
+    output: 1
+  - headline: Warga bertanya-tanya soal hubungan dekat preman dan aparat
+    output: 1
+  - headline: Aparat sebut diskusi dengan preman hanya untuk keamanan wilayah
+    output: 2
+  - headline: Polisi tetap pantau lokasi meski terlihat akur dengan preman
+    output: 2
+  - headline: 'Cuaca siang ini cerah, jalan ramai kendaraan '
+    output: 2

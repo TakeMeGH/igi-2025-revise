@@ -94,7 +94,7 @@ namespace Perspective.UI
             listPhotoParent.transform.GetChild(_currentPhotoIndex).gameObject.SetActive(false);
         }
         
-        private void OnCloseUploadMenu()
+        public void OnCloseUploadMenu()
         {
             SetUploadUI(false, null);
             inputReader.EnableGameplayInput();

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
+  m_Name: OneSidedBlowsByCivilians
+  m_EditorClassIdentifier: 
+  npcEvent: 9
+  imageContext: Sejumlah warga terlihat memukul polisi di jalan, kemudian melarikan
+    diri dari lokasi.
+  examples:
+  - headline: Warga menyerang aparat dan kabur, menimbulkan kekacauan
+    output: 3
+  - headline: Polisi bertindak tegas untuk mengejar warga yang menyerang mereka
+    output: 2
+  - headline: Keributan terjadi antara beberapa warga dan aparat di pusat kota
+    output: 1
+  - headline: Festival seni jalanan ramai dikunjungi warga hari ini
+    output: 0
+  - headline: Warga nekat menyerang polisi saat  malam
+    output: 2
+  - headline: Polisi jadi korban amukan warga, situasi makin memanas
+    output: 3
+  - headline: Aksi warga melawan polisi dipicu rasa frustasi terhadap situasi
+    output: 3
+  - headline: Pemerintah minta aparat tetap sabar hadapi provokasi massa
+    output: 2
+  - headline: Warga kabur usai memukul polisi, polisi belum beri keterangan resmi
+    output: 1
+  - headline: "Sejumlah warga menyerang aparat di jalan raya, pelaku melarikan diri\r"
+    output: 1
+  - headline: "Festival budaya di pusat kota berlangsung meriah\r"
+    output: 0

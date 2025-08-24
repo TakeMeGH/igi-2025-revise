@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
   m_Name: BeggingEvent
   m_EditorClassIdentifier: 
-  npcEvent: 0
+  npcEvent: 3
   imageContext: Seorang pengemis duduk di pinggir jalan meminta belas kasihan dari
     orang yang lewat.
   examples:

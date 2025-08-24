@@ -48,6 +48,7 @@ namespace Perspective.Character.NPC.State
             {
                 case NpcEvent.None:
                     break;
+                case NpcEvent.ConversationPoliceAndThugs:
                 case NpcEvent.Conversation:
                     NpcController.SwitchState(NpcController.NpcMeetInTheMiddleState);
                     break;

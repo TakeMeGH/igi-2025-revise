@@ -76,6 +76,7 @@ namespace Perspective.Character.NPC
         public float NearToBrawlDistance => nearToBrawlDistance;
         public bool MainFighter { get; private set; }
         public bool isPunching;
+        public bool isThisSide;
 
         #endregion
 
@@ -213,6 +214,9 @@ namespace Perspective.Character.NPC
                 case NpcType.BrutalPolice:
                     InvokeRepeating(nameof(DetectBrutalPoliceEvent), 10.0f, 2.5f);
                     break;
+                case NpcType.ThugsWalkAround:
+                    InvokeRepeating(nameof(DetectConversationPoliceAndThugsEvent), 10.0f, 2.5f);
+                    break;
             }
         }
 
@@ -223,7 +227,7 @@ namespace Perspective.Character.NPC
                 NpcType.Beggar => NpcBeggingState,
                 NpcType.Merchant => NpcIdlingState,
                 NpcType.Grafiti => NpcGrafitiState,
-                    _ => NpcWalkingState
+                _ => NpcWalkingState
             });
         }
 
@@ -306,6 +310,19 @@ namespace Perspective.Character.NPC
                 nearToTalkDistance);
         }
 
+        private void DetectConversationPoliceAndThugsEvent()
+        {
+            DetectNpcEvent(conversationRange, talkAngle,
+                other => other.NpcType == NpcType.PoliceWalkAround && npcType == NpcType.ThugsWalkAround,
+                other =>
+                {
+                    if (!other.SetEvent(NpcEvent.ConversationPoliceAndThugs, this)) return;
+                    SetEvent(NpcEvent.ConversationPoliceAndThugs, other);
+                },
+                nearToTalkDistance);
+        }
+
+
         private void DetectStealEvent()
         {
             DetectNpcEvent(stealRange, stealAngle,
@@ -322,7 +339,7 @@ namespace Perspective.Character.NPC
         private void DetectFightEvent()
         {
             DetectNpcEvent(brawlerRange, brawlerAngle,
-                other => other.NpcType == brawlTarget,
+                other => other.NpcType == brawlTarget && other.isThisSide != isThisSide,
                 other =>
                 {
                     if (!other.SetEvent(brawlEvent, this)) return;

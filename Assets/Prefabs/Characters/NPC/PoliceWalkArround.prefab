@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 564662256218954231, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
       propertyPath: nearToTalkDistance
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2880579469897927215, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
       propertyPath: m_Name

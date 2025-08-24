@@ -63,9 +63,10 @@ namespace Perspective.Character.NPC.State
             if (NpcController.Agent.pathPending ||
                 !(NpcController.Agent.remainingDistance <= NpcController.Agent.stoppingDistance)) return;
 
+            NpcController.transform.LookAt(NpcController.OtherNpc.transform.position);
             NpcController.Agent.velocity = Vector3.zero;
             _intimidationStarted = true;
-            NpcController.Animator.Play("Intimidate", 0, Random.Range(0f, 2f));
+            NpcController.Animator.Play("Intimidate", 0, Random.Range(0f, 1f));
             NpcController.Agent.isStopped = true;
 
             if (NpcController.NpcType != NpcType.Collector) return;

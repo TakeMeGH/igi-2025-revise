@@ -23,7 +23,10 @@ namespace Perspective.Simulation
         private void Awake()
         {
             foreach (var e in spawnTable.entries)
+            {
                 e.currentCount = 0;
+                e.nextPrefabIndex = 0;
+            }
 
             spawnPointCooldowns = new Dictionary<Transform, float>();
             foreach (var sp in spawnPoints)
@@ -50,18 +53,26 @@ namespace Perspective.Simulation
 
         private void TrySpawnRandomNpc()
         {
-            var availablePoints = spawnPoints.Where(sp => Time.time >= spawnPointCooldowns[sp]).ToList();
-
+            List<Transform> availablePoints = new List<Transform>();
+            foreach (var sp in spawnPoints)
+            {
+                if (Time.time >= spawnPointCooldowns[sp])
+                    availablePoints.Add(sp);
+            }
             if (availablePoints.Count == 0) return;
 
             var entry = PickWeightedEntry();
-            if (entry == null) return;
+            if (entry == null || entry.prefabs.Count == 0) return;
 
             var spawnPoint = availablePoints[Random.Range(0, availablePoints.Count)];
             var offset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
 
+            // Sequential prefab selection
+            var prefabToSpawn = entry.prefabs[entry.nextPrefabIndex];
+            entry.nextPrefabIndex = (entry.nextPrefabIndex + 1) % entry.prefabs.Count;
+
             GameObject npc = Instantiate(
-                entry.prefab,
+                prefabToSpawn,
                 spawnPoint.position + offset,
                 Quaternion.Euler(0, Random.Range(0f, 360f), 0)
             );
@@ -72,7 +83,7 @@ namespace Perspective.Simulation
             npc.transform.localScale *= Random.Range(0.9f, 1.1f);
 
             var controller = npc.GetComponent<NpcController>();
-            if (controller)
+            if (controller != null)
                 controller.OnNpcDestroyed += () => { entry.currentCount--; };
         }
 

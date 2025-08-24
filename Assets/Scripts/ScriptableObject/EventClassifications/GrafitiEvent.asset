@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
+  m_Name: GrafitiEvent
+  m_EditorClassIdentifier: 
+  npcEvent: 14
+  imageContext: Seorang individu sedang membuat grafiti di dinding kota.
+  examples:
+  - headline: Seniman jalanan menunjukkan kreativitas mereka melalui grafiti yang
+      menarik
+    output: 3
+  - headline: Aparat membersihkan dinding kota dari grafiti ilegal
+    output: 2
+  - headline: "Seorang pria terlihat sedang melukis grafiti di dinding\r"
+    output: 1
+  - headline: "Pasar malam di pusat kota ramai dikunjungi warga\r"
+    output: 0
+  - headline: 'Aksi vandalisme kembali terjadi, tembok kota dipenuhi coretan
+
+'
+    output: 2
+  - headline: Kreativitas anak muda tersalurkan lewat grafiti warna-warni
+    output: 3
+  - headline: Warga melihat seorang pria sedang menggambar grafiti di dinding kota
+    output: 1
+  - headline: Cuaca sore ini cerah banget
+    output: 0

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ExitPoints
   - EventPoints
+  - PauseController
   layers:
   - Default
   - TransparentFX

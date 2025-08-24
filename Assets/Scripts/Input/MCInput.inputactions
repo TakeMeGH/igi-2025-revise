@@ -68,6 +68,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "b08540fb-7f61-43d9-90e6-495a18d9c12a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -250,7 +259,7 @@
                 {
                     "name": "",
                     "id": "a9d018d8-7882-4b45-a7c7-bcfaf0c67b6b",
-                    "path": "<Keyboard>/1",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -271,23 +280,23 @@
                 },
                 {
                     "name": "",
-                    "id": "4b6eaa85-4119-448c-8146-7d04d2df7104",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Upload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0f92ac4d-07c0-4e51-96b2-e541b5db4d6c",
                     "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ZoomCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "482dc97a-03a4-4fe8-899f-8b287509b0e3",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -305,17 +314,26 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "UnPause",
+                    "type": "Button",
+                    "id": "ef2d5fd5-309e-4a0d-a673-2b45cefe7315",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "f044aedb-ca6c-4412-92ba-18bc896ee07b",
-                    "path": "<Keyboard>/3",
+                    "id": "117175fa-ab87-4ce1-8145-17c2db54a94c",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseUpload",
+                    "action": "UnPause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

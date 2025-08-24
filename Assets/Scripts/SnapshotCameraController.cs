@@ -98,9 +98,10 @@ namespace Perspective
                 renderTexture.Create();
             }
 
-            if (_snapshotHistory.Count > 10)
+            if (_snapshotHistory.Count >= 128)
             {
-                ClearSnapshots();
+                _snapshotHistory[0].Dispose();
+                _snapshotHistory.RemoveAt(0);
             }
 
             RenderTexture.active = renderTexture;
@@ -150,7 +151,7 @@ namespace Perspective
             return npcCounts;
         }
 
-        private void SetUploadUI()
+        public void SetUploadUI()
         {
             uploadUIEvent.RaiseEvent(true, _snapshotHistory);
             _snapshotHistory.Clear();

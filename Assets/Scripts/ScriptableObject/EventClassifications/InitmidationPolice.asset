@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
+  m_Name: InitmidationPolice
+  m_EditorClassIdentifier: 
+  npcEvent: 7
+  imageContext: Polisi terlihat mengintimidasi warga, namun warga bereaksi keras
+    dan terlibat adu argumentasi di jalan.
+  examples:
+  - headline: Warga berani menentang aksi aparat di jalan, suasana memanas
+    output: 3
+  - headline: Polisi menunjukkan sikap tegas untuk menertibkan kericuhan
+    output: 2
+  - headline: Keributan terjadi antara aparat dan warga di pusat kota
+    output: 1
+  - headline: Festival kuliner ramai dikunjungi warga di alun-alun
+    output: 0
+  - headline: Warga melawan intimidasi polisi, suasana panas di jalan
+    output: 3
+  - headline: Polisi hadapi warga yang menolak diintimidasi
+    output: 1
+  - headline: Aparat sebut tindakan warga bisa memicu kericuhan
+    output: 2
+  - headline: Panas banget cuacanya hari ini
+    output: 0

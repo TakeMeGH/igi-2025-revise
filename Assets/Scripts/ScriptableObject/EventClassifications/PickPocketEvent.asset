@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c3ac70296180545b59cd474959fdd4, type: 3}
   m_Name: PickPocketEvent
   m_EditorClassIdentifier: 
-  npcEvent: 0
+  npcEvent: 4
   imageContext: Seorang warga terlihat menjadi korban copet di jalan ramai, pelaku
     melarikan diri.
   examples:
@@ -23,4 +23,20 @@ MonoBehaviour:
   - headline: Kejadian copet membuat arus lalu lintas sedikit tersendat
     output: 1
   - headline: Festival musik jalanan berlangsung meriah di alun-alun kota
+    output: 0
+  - headline: Aksi copet meresahkan warga, korban kehilangan dompet saat keramaian
+    output: 3
+  - headline: "Polisi berjanji meningkatkan patroli untuk cegah aksi kriminal jalanan\r"
+    output: 2
+  - headline: "Kejadian pencopetan terjadi di area ramai, masih dalam penyelidikan\r"
+    output: 1
+  - headline: Festival musik berlangsung meriah tanpa hambatan
+    output: 0
+  - headline: Korban hanya bisa pasrah, copet langsung kabur di tengah kerumunan
+    output: 3
+  - headline: Kepolisian himbau masyarakat lebih waspada di tempat keramaian
+    output: 3
+  - headline: "Seorang warga melaporkan kehilangan barang akibat dicopet di pasar\r"
+    output: 1
+  - headline: Harga cabai naik lagi di pasaran
     output: 0

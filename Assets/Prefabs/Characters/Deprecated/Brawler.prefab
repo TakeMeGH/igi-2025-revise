@@ -950,7 +950,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.25, y: 0.2, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
@@ -7859,9 +7859,11 @@ MonoBehaviour:
   brawlTarget: 6
   brawlEvent: 6
   isPunching: 0
+  isThisSide: 0
   intimidatingPoliceRange: 0
   intimidatingPoliceAngle: 0
   nearToIntimidatingPoliceDistance: 0
+  isCiviliansScared: 0
   punchRange: 0
   punchAngle: 0
   nearToPunchDistance: 0
@@ -7870,6 +7872,14 @@ MonoBehaviour:
   kidnapAngle: 0
   nearToKidnapDistance: 0
   isKidnapper: 0
+  robberyRange: 0
+  robberyAngle: 0
+  nearToRobDistance: 0
+  isRobber: 0
+  beatdownRange: 0
+  beatdownAngle: 0
+  nearToBeatdownDistance: 0
+  isPoliceBeater: 0
 --- !u!195 &5906150412971776317
 NavMeshAgent:
   m_ObjectHideFlags: 0

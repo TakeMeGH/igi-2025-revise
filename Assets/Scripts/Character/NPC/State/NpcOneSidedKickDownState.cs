@@ -20,7 +20,6 @@ namespace Perspective.Character.NPC.State
 
             NpcController.transform.Rotate(0f, -45f, 0f);
 
-
             StartKickDown();
         }
 
