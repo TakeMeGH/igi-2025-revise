@@ -14,7 +14,7 @@ namespace Perspective.Interactions
 
         public void Interact()
         {
-            DataManager.Instance.GoNextDay();
+            FindAnyObjectByType<LevelManager>().TransitionNextDay();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Perspective.Simulation
         [SerializeField] private NpcSpawnTable spawnTable;
 
         private Dictionary<Transform, float> spawnPointCooldowns;
+        private Coroutine spawnCoroutine;
 
         private void Awake()
         {
@@ -32,13 +33,30 @@ namespace Perspective.Simulation
             foreach (var sp in spawnPoints)
                 spawnPointCooldowns[sp] = 0f;
         }
-
-        private void Start()
+        
+        /// <summary>
+        /// Starts the NPC spawner loop (can be called manually from other scripts).
+        /// </summary>
+        public void StartSpawner()
         {
+            if (spawnCoroutine != null) return; // prevent multiple loops
+
             for (int i = 0; i < initialTrySpawn; i++)
                 TrySpawnRandomNpc();
 
-            StartCoroutine(SpawnLoop());
+            spawnCoroutine = StartCoroutine(SpawnLoop());
+        }
+
+        /// <summary>
+        /// Stops the NPC spawner loop.
+        /// </summary>
+        public void StopSpawner()
+        {
+            if (spawnCoroutine != null)
+            {
+                StopCoroutine(spawnCoroutine);
+                spawnCoroutine = null;
+            }
         }
 
         private IEnumerator SpawnLoop()

@@ -69,7 +69,7 @@ namespace Perspective.Input
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
             isEnableGameplayBefore = isEnableGameplayNow;
-            isEnableGameplayNow = true;
+            isEnableGameplayNow = false;
         }
 
         public void EnableInputBefore()
