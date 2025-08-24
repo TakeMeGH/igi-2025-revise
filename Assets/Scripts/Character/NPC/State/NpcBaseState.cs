@@ -56,6 +56,7 @@ namespace Perspective.Character.NPC.State
                     if (NpcController.NpcType == NpcType.Thief)
                         NpcController.SwitchState(NpcController.NpcPickPocketState);
                     break;
+                case NpcEvent.CiviliansVsPolice:
                 case NpcEvent.Fight:
                     NpcController.SwitchState(NpcController.NpcTrashTalkState);
                     break;

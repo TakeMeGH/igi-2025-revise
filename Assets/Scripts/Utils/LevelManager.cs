@@ -63,15 +63,18 @@ namespace Perspective.Utils
                 case 1:
                     PlayTimeline("Day1/TL_Day1");
                     inputReader.EnableUIInput();
+                    AudioManager.Instance.PlayMusic("Day1BGM");
                     break;
                 case 2:
                     PlayTimeline("Day2/TL_Day2");
                     inputReader.EnableUIInput();
+                    AudioManager.Instance.PlayMusic("Day2BGM");
                     break;
                 case 3:
                     // PlayTimeline("Day3/TL_Day3");
                     PlayTimeline("Day3/TL_Day3pt2");
                     inputReader.EnableUIInput();
+                    AudioManager.Instance.PlayMusic("Day3BGM");
                     break;
                 default:
                     StartGame();
