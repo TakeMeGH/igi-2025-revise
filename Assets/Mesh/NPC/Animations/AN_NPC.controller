@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: runBopong
+  m_Name: RunBopong
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -59,7 +59,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pickUp
+  m_Name: PickUp
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -121,10 +121,10 @@ AnimatorStateMachine:
     m_Position: {x: 840, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6867568326184120323}
-    m_Position: {x: -240, y: 310, z: 0}
+    m_Position: {x: 620, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3243398410463983542}
-    m_Position: {x: -240, y: 360, z: 0}
+    m_Position: {x: 840, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8301525649831565270}
     m_Position: {x: -240, y: 410, z: 0}
@@ -133,13 +133,13 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4458308187937271025}
-    m_Position: {x: -240, y: 560, z: 0}
+    m_Position: {x: 400, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1292127431266045121}
     m_Position: {x: -240, y: 610, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6752135483086762527}
-    m_Position: {x: -240, y: 660, z: 0}
+    m_Position: {x: 400, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4886857068585788003}
     m_Position: {x: 620, y: 240, z: 0}
@@ -151,10 +151,10 @@ AnimatorStateMachine:
     m_Position: {x: 840, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8264678699884137278}
-    m_Position: {x: -20, y: 310, z: 0}
+    m_Position: {x: 840, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9080794606342544338}
-    m_Position: {x: -20, y: 460, z: 0}
+    m_Position: {x: 620, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8683806642182136617}
     m_Position: {x: -20, y: 510, z: 0}
@@ -210,7 +210,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: kickDown
+  m_Name: KickDown
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -262,7 +262,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: fallen
+  m_Name: Fallen
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -472,7 +472,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: dibopong
+  m_Name: Dibopong
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -498,7 +498,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: punchedFall
+  m_Name: PunchedFall
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

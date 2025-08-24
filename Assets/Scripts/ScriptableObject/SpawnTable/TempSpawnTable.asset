@@ -16,16 +16,32 @@ MonoBehaviour:
   - prefab: {fileID: 2880579469897927215, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
     maxCount: 7
     spawnWeight: 0.7
-    currentCount: 0
+    currentCount: 7
+  - prefab: {fileID: 2813701415952976556, guid: ed54b69c8530e4649bd6cfc541651391, type: 3}
+    maxCount: 4
+    spawnWeight: 0.646
+    currentCount: 4
   - prefab: {fileID: 574908021687075577, guid: 5e2a2d621d9b7a44fbcb0ce7febbba9d, type: 3}
     maxCount: 2
     spawnWeight: 0.3
-    currentCount: 0
+    currentCount: 2
   - prefab: {fileID: 8495046991789442523, guid: 167ffa4e24a3a4c4b9a282b39066ad4a, type: 3}
     maxCount: 4
     spawnWeight: 0.4
-    currentCount: 0
+    currentCount: 4
   - prefab: {fileID: 6825149887925808480, guid: 917d01221cd64cd4690f1f7a1a895202, type: 3}
     maxCount: 1
     spawnWeight: 0.7
-    currentCount: 0
+    currentCount: 1
+  - prefab: {fileID: 5126346347489009176, guid: ac2f160157657b0448a22db6cfed29c3, type: 3}
+    maxCount: 2
+    spawnWeight: 0.7
+    currentCount: 2
+  - prefab: {fileID: 8495046991789442523, guid: 2e99e2713e2cfae4d9d3e7740d336156, type: 3}
+    maxCount: 2
+    spawnWeight: 0.646
+    currentCount: 2
+  - prefab: {fileID: 8495046991789442523, guid: ed9953b67855ada4a9ef5819b7bc3ff6, type: 3}
+    maxCount: 2
+    spawnWeight: 0.7
+    currentCount: 2

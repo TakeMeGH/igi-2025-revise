@@ -36,7 +36,7 @@ namespace Perspective.Character.NPC.State
                 switch (NpcController.NpcType)
                 {
                     case NpcType.Brawler:
-                        NpcController.SwitchState(NpcController.NpcFightState);
+                        NpcController.SwitchState(NpcController.NpcTradingBlowsState);
                         break;
                     case NpcType.Collector:
                         NpcController.SwitchState(NpcController.NpcFleeState);
@@ -65,7 +65,7 @@ namespace Perspective.Character.NPC.State
 
             NpcController.Agent.velocity = Vector3.zero;
             _intimidationStarted = true;
-            NpcController.Animator.Play("Intimidate");
+            NpcController.Animator.Play("Intimidate", 0, Random.Range(0f, 2f));
             NpcController.Agent.isStopped = true;
 
             if (NpcController.NpcType != NpcType.Collector) return;

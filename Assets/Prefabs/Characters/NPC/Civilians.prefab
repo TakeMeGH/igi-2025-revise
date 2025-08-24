@@ -2640,7 +2640,28 @@ MonoBehaviour:
   brawlerRange: 0
   brawlerAngle: 0
   nearToBrawlDistance: 0
+  brawlTarget: 6
+  brawlEvent: 6
   isPunching: 0
+  intimidatingPoliceRange: 0
+  intimidatingPoliceAngle: 0
+  nearToIntimidatingPoliceDistance: 0
+  punchRange: 0
+  punchAngle: 0
+  nearToPunchDistance: 0
+  isPunchingOnOneSidedBlows: 0
+  kidnapRange: 0
+  kidnapAngle: 0
+  nearToKidnapDistance: 0
+  isKidnapper: 0
+  robberyRange: 0
+  robberyAngle: 0
+  nearToRobDistance: 0
+  isRobber: 0
+  beatdownRange: 0
+  beatdownAngle: 0
+  nearToBeatdownDistance: 0
+  isPoliceBeater: 0
 --- !u!195 &1932030644833570649
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2662,7 +2683,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 2
 --- !u!65 &1808136986503907257
 BoxCollider:
   m_ObjectHideFlags: 0

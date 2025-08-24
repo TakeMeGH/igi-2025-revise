@@ -9,5 +9,10 @@
         PickPocket,
         Intimidation,
         Fight,
+        IntimidationPolice,
+        OneSidedBlowsByCivilians,
+        PoliceKidnapCivilian,
+        HardcoreRobbery,
+        CivilianBeatdown
     }
 }

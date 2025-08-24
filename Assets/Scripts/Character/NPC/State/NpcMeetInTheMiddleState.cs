@@ -2,24 +2,25 @@ using UnityEngine;
 
 namespace Perspective.Character.NPC.State
 {
-    public class NpcConversationState : NpcBaseState
+    public class NpcMeetInTheMiddleState : NpcBaseState
     {
         private float _defaultStopingDistance;
-        private bool _conversationStarted;
-        private float _conversationDuration;
-        public NpcConversationState(NpcController npcController) : base(npcController)
+        private bool _meetInTheMiddleStarted;
+        private float _meetInTheMiddleDuration;
+
+        public NpcMeetInTheMiddleState(NpcController npcController) : base(npcController)
         {
         }
 
         public override void Enter()
         {
             base.Enter();
-            
-            NpcController.Agent.isStopped = false;
-            _conversationStarted = false;
 
-            _conversationDuration = 4f;
-            
+            NpcController.Agent.isStopped = false;
+            _meetInTheMiddleStarted = false;
+
+            _meetInTheMiddleDuration = 8f;
+
             NpcController.Animator.Play("Idle/Walk");
 
             _defaultStopingDistance = NpcController.Agent.stoppingDistance;
@@ -28,10 +29,10 @@ namespace Perspective.Character.NPC.State
 
         public override void Update()
         {
-            if (_conversationStarted)
+            if (_meetInTheMiddleStarted)
             {
-                _conversationDuration -= Time.deltaTime;
-                if (_conversationDuration > 0) return;
+                _meetInTheMiddleDuration -= Time.deltaTime;
+                if (_meetInTheMiddleDuration > 0) return;
                 NpcController.SwitchState(NpcController.NpcWalkingState);
                 NpcController.SetEventDetector(false);
             }
@@ -48,17 +49,22 @@ namespace Perspective.Character.NPC.State
                 NpcController.SwitchState(NpcController.NpcIdlingState);
                 return;
             }
+
             NpcController.Agent.SetDestination(NpcController.OtherNpc.transform.position);
             NpcController.Animator.SetFloat(Speed, NpcController.Agent.velocity.magnitude);
             UpdateRotation();
 
             if (NpcController.Agent.pathPending ||
                 !(NpcController.Agent.remainingDistance <= NpcController.Agent.stoppingDistance)) return;
-            
+
             NpcController.Agent.isStopped = true;
-            NpcController.Animator.Play("Talk");
-            _conversationStarted = true;
+            _meetInTheMiddleStarted = true;
             NpcController.SetEventDetector(true);
+
+            if (NpcController.CurrentEvent == NpcEvent.Conversation)
+                NpcController.Animator.Play("Talk");
+            else
+                NpcController.Animator.Play("Yell", 0, Random.Range(0, 2f));
         }
 
         public override void Exit()

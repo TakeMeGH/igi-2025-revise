@@ -7859,6 +7859,17 @@ MonoBehaviour:
   brawlTarget: 6
   brawlEvent: 6
   isPunching: 0
+  intimidatingPoliceRange: 0
+  intimidatingPoliceAngle: 0
+  nearToIntimidatingPoliceDistance: 0
+  punchRange: 0
+  punchAngle: 0
+  nearToPunchDistance: 0
+  isPunchingOnOneSidedBlows: 0
+  kidnapRange: 0
+  kidnapAngle: 0
+  nearToKidnapDistance: 0
+  isKidnapper: 0
 --- !u!195 &5906150412971776317
 NavMeshAgent:
   m_ObjectHideFlags: 0

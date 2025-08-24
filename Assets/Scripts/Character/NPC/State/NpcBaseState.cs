@@ -49,7 +49,7 @@ namespace Perspective.Character.NPC.State
                 case NpcEvent.None:
                     break;
                 case NpcEvent.Conversation:
-                    NpcController.SwitchState(NpcController.NpcConversationState);
+                    NpcController.SwitchState(NpcController.NpcMeetInTheMiddleState);
                     break;
                 case NpcEvent.PickPocket:
                     if (NpcController.NpcType == NpcType.Thief)
@@ -61,6 +61,25 @@ namespace Perspective.Character.NPC.State
                 case NpcEvent.Intimidation:
                     if (NpcController.NpcType == NpcType.Collector)
                         NpcController.SwitchState(NpcController.NpcTrashTalkState);
+                    break;
+                case NpcEvent.IntimidationPolice:
+                    NpcController.SwitchState(NpcController.NpcMeetInTheMiddleState);
+                    break;
+                case NpcEvent.OneSidedBlowsByCivilians:
+                    if (NpcController.NpcType == NpcType.CivilianBeater)
+                        NpcController.SwitchState(NpcController.NpcComeOverState);
+                    break;
+                case NpcEvent.PoliceKidnapCivilian:
+                    if (NpcController.NpcType == NpcType.PoliceKidnapper)
+                        NpcController.SwitchState(NpcController.NpcComeOverState);
+                    break;
+                case NpcEvent.HardcoreRobbery:
+                    if (NpcController.NpcType == NpcType.HardcoreThief)
+                        NpcController.SwitchState(NpcController.NpcComeOverState);
+                    break;
+                case NpcEvent.CivilianBeatdown:
+                    if (NpcController.NpcType == NpcType.BrutalPolice)
+                        NpcController.SwitchState(NpcController.NpcComeOverState);
                     break;
                 case NpcEvent.Begging:
                 case NpcEvent.DisableEvent:

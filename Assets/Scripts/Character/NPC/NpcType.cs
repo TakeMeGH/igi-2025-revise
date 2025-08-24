@@ -5,10 +5,15 @@
         None,
         Civilian,
         Thief,
-        Police,
+        IntimidatingPolice,
         Beggar,
         Merchant,
         Brawler,
-        Collector
+        Collector,
+        CivilianBeater,
+        PoliceWalkAround,
+        PoliceKidnapper,
+        HardcoreThief,
+        BrutalPolice,
     }
 }

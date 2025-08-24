@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace Perspective.Character.NPC.State
 {
-    public class NpcFightState : NpcBaseState
+    public class NpcTradingBlowsState : NpcBaseState
     {
         private int _punchLimit;
         private bool _isChase;
         private float _toChaseDuration;
 
-        public NpcFightState(NpcController npcController) : base(npcController)
+        public NpcTradingBlowsState(NpcController npcController) : base(npcController)
         {
         }
 
