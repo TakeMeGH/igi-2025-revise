@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Perspective.Mission;
-using TMPro;
 using UnityEngine;
 
 namespace Perspective.UI
@@ -8,15 +7,10 @@ namespace Perspective.UI
     public class MissionController : MonoBehaviour
     {
         [Header("UI References")]
-        [Tooltip("Parent object where mission UI entries will be spawned (e.g., a Vertical Layout Group).")]
-        [SerializeField]
-        private Transform missionListParent;
+        [SerializeField] private Transform missionListParent;
+        [SerializeField] private GameObject missionEntryPrefab;
 
-        [Tooltip("Prefab for a single mission objective UI element.")]
-        [SerializeField]
-        private GameObject missionEntryPrefab;
-
-        private readonly List<GameObject> spawnedEntries = new List<GameObject>();
+        private readonly List<MissionEntryUI> spawnedEntries = new List<MissionEntryUI>();
 
         /// <summary>
         /// Spawns mission objectives UI under the parent object.
@@ -29,17 +23,15 @@ namespace Perspective.UI
 
             foreach (var obj in mission.objectives)
             {
-                GameObject entry = Instantiate(missionEntryPrefab, missionListParent);
-                entry.name = $"MissionEntry_{obj.targetEvent}";
+                GameObject entryGO = Instantiate(missionEntryPrefab, missionListParent);
+                entryGO.name = $"MissionEntry_{obj.targetEvent}";
 
-                // If prefab has a script for displaying text, update it
-                var ui = entry.GetComponent<TMP_Text>();
-                if (ui != null)
-                {
-                    ui.SetText(obj.description);
-                }
+                var entryUI = entryGO.GetComponent<MissionEntryUI>();
+                Debug.Log(entryUI + " DEBUG" );
+                if (entryUI != null)
+                    entryUI.Initialize(obj);
 
-                spawnedEntries.Add(entry);
+                spawnedEntries.Add(entryUI);
             }
         }
 
@@ -48,13 +40,24 @@ namespace Perspective.UI
         /// </summary>
         private void ClearMissionUI()
         {
-            foreach (var go in spawnedEntries)
+            foreach (var entry in spawnedEntries)
             {
-                if (go != null)
-                    Destroy(go);
+                if (entry != null)
+                    Destroy(entry.gameObject);
             }
-
             spawnedEntries.Clear();
+        }
+
+        /// <summary>
+        /// Updates all mission UI entries (call after a photo is taken).
+        /// </summary>
+        public void RefreshMissionUI()
+        {
+            foreach (var entry in spawnedEntries)
+            {
+                if (entry != null)
+                    entry.UpdateUI();
+            }
         }
     }
 }

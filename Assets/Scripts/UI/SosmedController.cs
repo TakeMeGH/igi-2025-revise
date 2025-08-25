@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Perspective.Character.NPC;
+using Perspective.Mission;
 using Perspective.Utils;
 using TMPro;
 using Unity.VisualScripting;
@@ -76,6 +77,7 @@ namespace Perspective.UI
                 var answer = await ChatBotUtils.Instance.AskBot(commentsPrompt, description.text);
                 var comments = ChatBotUtils.Instance.FormatComments(answer);
 
+                FindAnyObjectByType<MissionManager>().OnPhotoTaken(currentEvent);
                 Debug.Log(answer);
 
                 StartCoroutine(SpawnCommentsWithInterval(comments, 0.5f));

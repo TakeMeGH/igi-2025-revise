@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 40439196}
   - component: {fileID: 40439198}
   - component: {fileID: 40439197}
+  - component: {fileID: 40439199}
   m_Layer: 0
   m_Name: Mission
   m_TagString: Untagged
@@ -415,6 +416,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40439195}
   m_CullTransparentMesh: 1
+--- !u!114 &40439199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40439195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e010e4038bfe42b5b021dbc25539d6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  descriptionText: {fileID: 40439197}
 --- !u!1 &47077758
 GameObject:
   m_ObjectHideFlags: 0

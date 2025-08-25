@@ -9,7 +9,8 @@ namespace Perspective.Mission
     {
         [Header("Missions (index = day-1)")]
         [Tooltip("Assign up to 5 mission data assets (Day 1 = index 0, Day 2 = index 1, etc.)")]
-        [SerializeField] private MissionData[] dayMissions = new MissionData[5];
+        [SerializeField]
+        private MissionData[] dayMissions = new MissionData[5];
 
         private MissionData currentMission;
         public MissionData CurrentMission => currentMission;
@@ -55,6 +56,10 @@ namespace Perspective.Mission
             currentMission.RegisterNpcEventPhoto(npcEvent);
 
             Debug.Log($"Photo registered: {npcEvent}. Mission progress: {GetMissionProgress()}");
+
+            // Refresh the UI
+            if (missionController != null)
+                missionController.RefreshMissionUI();
 
             if (currentMission.IsMissionComplete)
             {
