@@ -41,7 +41,7 @@ namespace Perspective.Utils
 
         private void HandleDayLogic()
         {
-            var beggarsActive = currentDay is 1 or 2;
+            var beggarsActive = currentDay is 2;
             foreach (var beggar in beggars)
             {
                 if (beggar) beggar.SetActive(beggarsActive);

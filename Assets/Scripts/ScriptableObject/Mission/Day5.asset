@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectives:
   - targetEvent: 15
-    requiredCount: 1
-    description: Rakyat lawan seragam
+    requiredCount: 2
+    description: Kehancuran yang dinantikan
     currentCount: 0
   - targetEvent: 12
-    requiredCount: 1
-    description: Menendang yang jatuh
+    requiredCount: 2
+    description: Bernafas sambil terjatuh
     currentCount: 0
   - targetEvent: 11
-    requiredCount: 1
-    description: Pukulan dan lari
+    requiredCount: 2
+    description: Ini milikku bukan milikmu
     currentCount: 0

@@ -15,21 +15,17 @@ MonoBehaviour:
   objectives:
   - targetEvent: 7
     requiredCount: 1
-    description: Perang kata-kata
+    description: Mulut hariman untuk harimau
     currentCount: 0
   - targetEvent: 8
     requiredCount: 1
-    description: Ancaman tanpa pukulan
+    description: Keamanan yang mengancam
+    currentCount: 0
+  - targetEvent: 14
+    requiredCount: 2
+    description: Tembok menjadi kitab suci rakyat
     currentCount: 0
   - targetEvent: 9
     requiredCount: 1
-    description: Pukulan dari pelindung
-    currentCount: 0
-  - targetEvent: 14
-    requiredCount: 1
-    description: Pesan dilukis gelap
-    currentCount: 0
-  - targetEvent: 10
-    requiredCount: 1
-    description: Pukulan, lalu menghilang
+    description: Seragam biru dibirukan pilu
     currentCount: 0

@@ -25,16 +25,12 @@ namespace Perspective.UI
         {
             if (status)
             {
-                canvasGroup.interactable = true;
-                canvasGroup.blocksRaycasts = true;
                 canvasGroup.alpha = 1;
                 
                 descriptions.SetText(value);
             }
             else
             {
-                canvasGroup.interactable = false;
-                canvasGroup.blocksRaycasts = false;
                 canvasGroup.alpha = 0;
             }
         }

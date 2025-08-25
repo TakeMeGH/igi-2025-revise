@@ -22,20 +22,6 @@ MonoBehaviour:
     currentCount: 0
     nextPrefabIndex: 0
   - prefabs:
-    - {fileID: 8495046991789442523, guid: 2e99e2713e2cfae4d9d3e7740d336156, type: 3}
-    - {fileID: 8495046991789442523, guid: 04fab4ed65034ac41b7f238cffe52db9, type: 3}
-    - {fileID: 8495046991789442523, guid: ae27d3d21a87f2e4a87309b4096e3ea6, type: 3}
-    maxCount: 2
-    spawnWeight: 0.7
-    currentCount: 0
-    nextPrefabIndex: 0
-  - prefabs:
-    - {fileID: 5126346347489009176, guid: 47775063b7a6a1845a159b5bb871d6d5, type: 3}
-    maxCount: 2
-    spawnWeight: 0.7
-    currentCount: 0
-    nextPrefabIndex: 0
-  - prefabs:
     - {fileID: 5126346347489009176, guid: ac2f160157657b0448a22db6cfed29c3, type: 3}
     maxCount: 2
     spawnWeight: 0.7

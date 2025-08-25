@@ -17,7 +17,7 @@ MonoBehaviour:
     - {fileID: 2880579469897927215, guid: 3c469503e259a8b4e9de6c8f07c934d8, type: 3}
     - {fileID: 2880579469897927215, guid: 4bbd90fd3416a044ab27f7238ffe33e0, type: 3}
     - {fileID: 2880579469897927215, guid: 1b57f9749bf1fb846a94fb32e0c9ba62, type: 3}
-    maxCount: 8
+    maxCount: 6
     spawnWeight: 0.7
     currentCount: 0
     nextPrefabIndex: 0
@@ -37,18 +37,6 @@ MonoBehaviour:
     nextPrefabIndex: 0
   - prefabs:
     - {fileID: 5126346347489009176, guid: ac2f160157657b0448a22db6cfed29c3, type: 3}
-    maxCount: 2
-    spawnWeight: 0.7
-    currentCount: 0
-    nextPrefabIndex: 0
-  - prefabs:
-    - {fileID: 2813701415952976556, guid: ed54b69c8530e4649bd6cfc541651391, type: 3}
-    maxCount: 4
-    spawnWeight: 0.7
-    currentCount: 0
-    nextPrefabIndex: 0
-  - prefabs:
-    - {fileID: 8495046991789442523, guid: ed9953b67855ada4a9ef5819b7bc3ff6, type: 3}
     maxCount: 2
     spawnWeight: 0.7
     currentCount: 0

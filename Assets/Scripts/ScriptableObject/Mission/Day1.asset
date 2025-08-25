@@ -13,27 +13,11 @@ MonoBehaviour:
   m_Name: Day1
   m_EditorClassIdentifier: 
   objectives:
-  - targetEvent: 2
-    requiredCount: 1
-    description: Ngerumpi
-    currentCount: 0
-  - targetEvent: 4
-    requiredCount: 1
-    description: Saku hilang, teriak
-    currentCount: 0
-  - targetEvent: 5
-    requiredCount: 1
-    description: Bayar untuk aman
-    currentCount: 0
-  - targetEvent: 3
-    requiredCount: 1
-    description: Tangan terbuka di mana-mana
-    currentCount: 0
-  - targetEvent: 6
-    requiredCount: 1
-    description: Jalanan jadi ring
-    currentCount: 0
   - targetEvent: 16
-    requiredCount: 1
-    description: Hukum bicara liar
-    currentCount: 0
+    requiredCount: 2
+    description: Diskusi antara latar belakang berbeda
+    currentCount: 1
+  - targetEvent: 4
+    requiredCount: 2
+    description: Miskin yang memangsa miskin
+    currentCount: 1
