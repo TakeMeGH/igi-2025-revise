@@ -21,8 +21,6 @@ namespace Perspective.Utils
 
         protected override void OwnAwake()
         {
-            DontDestroyOnLoad(gameObject);
-
             musicSource.loop = true;
             sfxSource.loop = false;
 

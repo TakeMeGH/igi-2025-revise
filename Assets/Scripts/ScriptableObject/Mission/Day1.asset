@@ -15,25 +15,25 @@ MonoBehaviour:
   objectives:
   - targetEvent: 2
     requiredCount: 1
-    description: Ngerumpi.
+    description: Ngerumpi
     currentCount: 0
   - targetEvent: 4
     requiredCount: 1
-    description: Saku hilang, teriak.
+    description: Saku hilang, teriak
     currentCount: 0
   - targetEvent: 5
     requiredCount: 1
-    description: Bayar untuk aman.
+    description: Bayar untuk aman
     currentCount: 0
   - targetEvent: 3
     requiredCount: 1
-    description: Tangan terbuka di mana-mana.
+    description: Tangan terbuka di mana-mana
     currentCount: 0
   - targetEvent: 6
     requiredCount: 1
-    description: Jalanan jadi ring.
+    description: Jalanan jadi ring
     currentCount: 0
   - targetEvent: 16
     requiredCount: 1
-    description: Hukum bicara liar.
+    description: Hukum bicara liar
     currentCount: 0

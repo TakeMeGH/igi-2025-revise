@@ -1,6 +1,8 @@
 using Perspective.Input;
+using Perspective.Interactions;
 using Perspective.Interactions.Core;
 using Perspective.Simulation;
+using Perspective.UI;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -21,7 +23,8 @@ namespace Perspective.Utils
         [SerializeField] private GameObject player;
         [SerializeField] private NpcCitySpawner spawner;
         [SerializeField] private InputReader inputReader;
-
+        [SerializeField] private CanvasGroup missionController;
+        [SerializeField] private Bed bed;
         #endregion
 
         private int currentDay;
@@ -64,23 +67,27 @@ namespace Perspective.Utils
 
             // ✅ Use cached interactor
             _interactor?.DisableInteractor();
+            bed.SetIsInteractable(false);
 
             switch (currentDay)
             {
                 case 1:
                     PlayTimeline("Day1/TL_Day1");
                     inputReader.EnableUIInput();
+                    missionController.alpha = 0;
                     AudioManager.Instance.PlayMusic("Day1BGM");
                     break;
                 case 2:
                     PlayTimeline("Day2/TL_Day2");
                     inputReader.EnableUIInput();
+                    missionController.alpha = 0;
                     AudioManager.Instance.PlayMusic("Day2BGM");
                     break;
                 case 3:
                     if (DataManager.Instance.GetReputation() > 0) PlayTimeline("Day3/TL_Day3");
                     else if (DataManager.Instance.GetReputation() < 0) PlayTimeline("Day3/TL_Day3pt2");
                     inputReader.EnableUIInput();
+                    missionController.alpha = 0;
                     AudioManager.Instance.PlayMusic("Day3BGM");
                     break;
                 case 4:
@@ -118,6 +125,7 @@ namespace Perspective.Utils
             cameraHolder.SetActive(true);
             player.SetActive(true);
             spawner.StartSpawner();
+            missionController.alpha = 1;
             inputReader.EnableGameplayInput();
 
             // ✅ Use cached interactor
@@ -136,10 +144,9 @@ namespace Perspective.Utils
                 cameraHolder.SetActive(false);
                 player.SetActive(false);
                 inputReader.EnableUIInput();
-
-                // ✅ Use cached interactor
                 _interactor?.DisableInteractor();
-
+                missionController.alpha = 0;
+                
                 if (DataManager.Instance.GetReputation() > 0) PlayTimeline("Day5/TL_Day5");
                 else if (DataManager.Instance.GetReputation() < 0) PlayTimeline("Day5/TL_Day5pt2");
             }

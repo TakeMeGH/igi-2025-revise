@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 40439197}
   - component: {fileID: 40439199}
   m_Layer: 0
-  m_Name: Mission
+  m_Name: TitleMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,7 +315,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 50}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &40439197
 MonoBehaviour:
@@ -364,15 +364,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
+  m_fontSize: 41.65
   m_fontSizeBase: 42
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 42
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -595,12 +595,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayMissions:
-  - {fileID: 11400000, guid: bbee308124ee3c24ca3caf5bc2f1d9bd, type: 2}
+  - {fileID: 11400000, guid: 7e97198cd7dcf3a4ab75b78fdc519934, type: 2}
   - {fileID: 11400000, guid: 634ec1ed93860c6448540be9cde3cb62, type: 2}
   - {fileID: 11400000, guid: 4c1cd096c10ddeb459cab754b83fd503, type: 2}
   - {fileID: 11400000, guid: dce57b02c574e884e92095fa2939fd30, type: 2}
   - {fileID: 11400000, guid: d978c7ef928844b4c86e7fa2af672f1a, type: 2}
   missionController: {fileID: 1517776138}
+  bed: {fileID: 1014689464}
 --- !u!4 &70742852
 Transform:
   m_ObjectHideFlags: 0
@@ -12144,6 +12145,8 @@ MonoBehaviour:
   player: {fileID: 826656444}
   spawner: {fileID: 1402984470}
   inputReader: {fileID: 11400000, guid: 69ae5acc6a18fff408b10875e466a482, type: 2}
+  missionController: {fileID: 1517776139}
+  bed: {fileID: 1014689464}
 --- !u!4 &1431429553
 Transform:
   m_ObjectHideFlags: 0
@@ -12434,6 +12437,9 @@ GameObject:
   - component: {fileID: 1517776137}
   - component: {fileID: 1517776136}
   - component: {fileID: 1517776138}
+  - component: {fileID: 1517776139}
+  - component: {fileID: 1517776141}
+  - component: {fileID: 1517776140}
   m_Layer: 0
   m_Name: MissionView
   m_TagString: Untagged
@@ -12459,7 +12465,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1517776136
 MonoBehaviour:
@@ -12473,8 +12479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 0
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!114 &1517776137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12513,8 +12519,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a352b81e2c529a4fa22956ddbab7fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: {fileID: 40439197}
   missionListParent: {fileID: 1517776135}
-  missionEntryPrefab: {fileID: 40439195}
+  missionEntryPrefab: {fileID: 1542108630317260605, guid: 6e68563d1503a724ea1f5adf0cd6cdc9, type: 3}
+--- !u!225 &1517776139
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517776134}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &1517776140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517776134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1517776141
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517776134}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1552385447
 PrefabInstance:
   m_ObjectHideFlags: 0

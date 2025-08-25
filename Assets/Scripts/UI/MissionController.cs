@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Perspective.Mission;
+using TMPro;
 using UnityEngine;
 
 namespace Perspective.UI
@@ -7,6 +8,7 @@ namespace Perspective.UI
     public class MissionController : MonoBehaviour
     {
         [Header("UI References")]
+        [SerializeField] private TMP_Text title;
         [SerializeField] private Transform missionListParent;
         [SerializeField] private GameObject missionEntryPrefab;
 
@@ -27,7 +29,6 @@ namespace Perspective.UI
                 entryGO.name = $"MissionEntry_{obj.targetEvent}";
 
                 var entryUI = entryGO.GetComponent<MissionEntryUI>();
-                Debug.Log(entryUI + " DEBUG" );
                 if (entryUI != null)
                     entryUI.Initialize(obj);
 
@@ -38,7 +39,7 @@ namespace Perspective.UI
         /// <summary>
         /// Clears all spawned UI entries.
         /// </summary>
-        private void ClearMissionUI()
+        public void ClearMissionUI()
         {
             foreach (var entry in spawnedEntries)
             {
@@ -58,6 +59,11 @@ namespace Perspective.UI
                 if (entry != null)
                     entry.UpdateUI();
             }
+        }
+
+        public void SetTitle(string title)
+        {
+            this.title.text = title;
         }
     }
 }

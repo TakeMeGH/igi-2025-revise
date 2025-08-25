@@ -1,4 +1,5 @@
 using Perspective.Character.NPC;
+using Perspective.Interactions;
 using Perspective.UI;
 using Perspective.Utils;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Perspective.Mission
         private MissionData currentMission;
         public MissionData CurrentMission => currentMission;
         [SerializeField] private MissionController missionController;
+        [SerializeField] private Bed bed;
 
         private void Start()
         {
@@ -64,7 +66,9 @@ namespace Perspective.Mission
             if (currentMission.IsMissionComplete)
             {
                 Debug.Log("Mission complete!");
-                // TODO: Trigger mission completion rewards/cutscene/etc.
+                missionController.ClearMissionUI();
+                missionController.SetTitle("Go To Bed");
+                bed.SetIsInteractable(true);
             }
         }
 

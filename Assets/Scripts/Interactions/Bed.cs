@@ -16,5 +16,10 @@ namespace Perspective.Interactions
         {
             FindAnyObjectByType<LevelManager>().TransitionNextDay();
         }
+        
+        public void SetIsInteractable(bool isInteractable)
+        {
+            this.isInteractable = isInteractable;
+        }
     }
 }
