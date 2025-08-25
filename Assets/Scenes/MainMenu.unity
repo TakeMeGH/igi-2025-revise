@@ -1455,9 +1455,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 136614589}
-        m_TargetAssemblyTypeName: Perspective.MainMenuController, Assembly-CSharp
-        m_MethodName: GotoInGame
+      - m_Target: {fileID: 519958462}
+        m_TargetAssemblyTypeName: Perspective.ToggleTutorial, Assembly-CSharp
+        m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11010,6 +11010,8 @@ MonoBehaviour:
   player: {fileID: 826656444}
   spawner: {fileID: 0}
   inputReader: {fileID: 11400000, guid: 69ae5acc6a18fff408b10875e466a482, type: 2}
+  missionController: {fileID: 0}
+  bed: {fileID: 0}
 --- !u!4 &1431429553
 Transform:
   m_ObjectHideFlags: 0
