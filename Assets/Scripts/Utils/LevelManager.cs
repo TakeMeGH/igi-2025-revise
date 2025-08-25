@@ -149,11 +149,12 @@ namespace Perspective.Utils
                 cameraHolder.SetActive(false);
                 player.SetActive(false);
                 inputReader.EnableUIInput();
-                _interactor?.DisableInteractor();
                 missionController.alpha = 0;
 
                 if (DataManager.Instance.GetReputation() > 0) PlayTimeline("Day5/TL_Day5");
                 else if (DataManager.Instance.GetReputation() < 0) PlayTimeline("Day5/TL_Day5pt2");
+                
+                _interactor?.DisableInteractor();
             }
             else
             {

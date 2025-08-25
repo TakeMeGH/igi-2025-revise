@@ -73,7 +73,7 @@ namespace Perspective
             );
         }
 
-        private void SetCamera(bool enableCamera)
+        public void SetCamera(bool enableCamera)
         {
             cameraHUD.alpha = enableCamera ? 1 : 0;
             _isUsingCamera = enableCamera;

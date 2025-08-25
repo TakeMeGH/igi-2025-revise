@@ -52,7 +52,11 @@ namespace Perspective.Utils
                     else if (DataManager.Instance.GetReputation() < 0)
                     {
                         if (counter == 1) Invoke(nameof(CallDialogue), 0.1f);
-                        if (counter == 2) levelManager.PlayTimeline("Day5/TL_Day5_2pt2");
+                        if (counter == 2)
+                        {
+                            AudioManager.Instance.PlaySFX("SuaraTembakan");
+                            levelManager.PlayTimeline("Day5/TL_Day5_2pt2");
+                        }
                     }
                     break;
                 default:

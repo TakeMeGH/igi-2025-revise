@@ -15,6 +15,7 @@ namespace Perspective.Interactions
         public void Interact()
         {
             FindAnyObjectByType<LevelManager>().TransitionNextDay();
+            FindAnyObjectByType<SnapshotCameraController>().SetCamera(false);
         }
         
         public void SetIsInteractable(bool isInteractable)
