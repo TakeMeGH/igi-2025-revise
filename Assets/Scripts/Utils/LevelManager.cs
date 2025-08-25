@@ -3,6 +3,7 @@ using Perspective.Interactions.Core;
 using Perspective.Simulation;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 namespace Perspective.Utils
 {
@@ -150,7 +151,7 @@ namespace Perspective.Utils
 
         public void FinishGame()
         {
-            Debug.Log("Finish Game");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
