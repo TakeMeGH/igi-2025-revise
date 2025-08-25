@@ -101,7 +101,7 @@ namespace Perspective
                 renderTexture.Create();
             }
 
-            if (_snapshotHistory.Count >= 128)
+            if (_snapshotHistory.Count > 21)
             {
                 _snapshotHistory[0].Dispose();
                 _snapshotHistory.RemoveAt(0);

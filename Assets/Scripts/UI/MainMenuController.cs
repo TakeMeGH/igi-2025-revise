@@ -18,6 +18,8 @@ namespace Perspective
 
         public void GotoInGame()
         {
+            DataManager.Instance.currentDay = 1;
+            DataManager.Instance.reputation = 5;
             SceneManager.LoadScene("MainWorld");
         }
 

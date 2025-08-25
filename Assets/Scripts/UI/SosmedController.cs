@@ -5,7 +5,6 @@ using Perspective.Character.NPC;
 using Perspective.Mission;
 using Perspective.Utils;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
