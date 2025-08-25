@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3330ac672748de74b9422cd50dcd76a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDay: 5
-  reputation: 0
+  currentDay: 1
+  reputation: 5
 --- !u!1 &639246462875715006
 GameObject:
   m_ObjectHideFlags: 0
