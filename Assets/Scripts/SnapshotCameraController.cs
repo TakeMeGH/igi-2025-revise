@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Perspective.Character.NPC;
 using Perspective.Event;
 using Perspective.Input;
+using Perspective.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -89,6 +90,8 @@ namespace Perspective
         private void TakeSnapshot()
         {
             if (!_isUsingCamera) return;
+            
+            AudioManager.Instance.PlaySFX("TakePicture");
 
             if (renderTexture &&
                 renderTexture.graphicsFormat != UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_SRGB)

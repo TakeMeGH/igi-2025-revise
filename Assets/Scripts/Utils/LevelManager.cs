@@ -25,6 +25,7 @@ namespace Perspective.Utils
         [SerializeField] private InputReader inputReader;
         [SerializeField] private CanvasGroup missionController;
         [SerializeField] private Bed bed;
+
         #endregion
 
         private int currentDay;
@@ -91,12 +92,16 @@ namespace Perspective.Utils
                     AudioManager.Instance.PlayMusic("Day3BGM");
                     break;
                 case 4:
+                    PlayTimeline("Day4/TL_Day4");
+                    inputReader.EnableUIInput();
+                    missionController.alpha = 0;
                     AudioManager.Instance.PlayMusic("Day4BGM");
-                    StartGame();
                     break;
                 case 5:
+                    PlayTimeline("Day5/TL_Day5Start");
+                    inputReader.EnableUIInput();
+                    missionController.alpha = 0;
                     AudioManager.Instance.PlayMusic("Day5BGM");
-                    StartGame();
                     break;
                 default:
                     StartGame();
@@ -146,7 +151,7 @@ namespace Perspective.Utils
                 inputReader.EnableUIInput();
                 _interactor?.DisableInteractor();
                 missionController.alpha = 0;
-                
+
                 if (DataManager.Instance.GetReputation() > 0) PlayTimeline("Day5/TL_Day5");
                 else if (DataManager.Instance.GetReputation() < 0) PlayTimeline("Day5/TL_Day5pt2");
             }
@@ -157,6 +162,11 @@ namespace Perspective.Utils
         }
 
         public void FinishGame()
+        {
+            GoToMainMenu();
+        }
+
+        public void GoToMainMenu()
         {
             SceneManager.LoadScene("MainMenu");
         }

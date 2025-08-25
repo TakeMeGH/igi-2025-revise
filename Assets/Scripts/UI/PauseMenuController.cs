@@ -1,5 +1,6 @@
 using System;
 using Perspective.Input;
+using Perspective.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -74,6 +75,11 @@ namespace Perspective.UI
 
         public void GoToMainMenu()
         {
+            Time.timeScale = 1f;
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.interactable = false;
+            AudioManager.Instance.StopMusic();
+            FindAnyObjectByType<LevelManager>()?.PlayTimeline("TL_TransiitionMainMenu");
         }
     }
 }
