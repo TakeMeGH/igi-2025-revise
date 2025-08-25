@@ -17,10 +17,6 @@ MonoBehaviour:
     requiredCount: 1
     description: Mulut hariman untuk harimau
     currentCount: 0
-  - targetEvent: 8
-    requiredCount: 1
-    description: Keamanan yang mengancam
-    currentCount: 0
   - targetEvent: 14
     requiredCount: 2
     description: Tembok menjadi kitab suci rakyat
@@ -28,4 +24,8 @@ MonoBehaviour:
   - targetEvent: 9
     requiredCount: 1
     description: Seragam biru dibirukan pilu
+    currentCount: 0
+  - targetEvent: 8
+    requiredCount: 1
+    description: Keamanan yang mengancam
     currentCount: 0

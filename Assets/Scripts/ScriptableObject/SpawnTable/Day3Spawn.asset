@@ -41,3 +41,9 @@ MonoBehaviour:
     spawnWeight: 0.7
     currentCount: 0
     nextPrefabIndex: 0
+  - prefabs:
+    - {fileID: 2813701415952976556, guid: 83dd9eb82c1aab048932325b8f4284a6, type: 3}
+    maxCount: 4
+    spawnWeight: 0.7
+    currentCount: 0
+    nextPrefabIndex: 0
