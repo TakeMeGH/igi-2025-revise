@@ -1,4 +1,5 @@
 using Perspective.Input;
+using Perspective.Interactions.Core;
 using Perspective.Simulation;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -24,11 +25,13 @@ namespace Perspective.Utils
 
         private int currentDay;
 
+        private Interactor _interactor;
+
         private void Start()
         {
             currentDay = DataManager.Instance.currentDay;
-
             HandleDayLogic();
+            _interactor = FindAnyObjectByType<Interactor>();
         }
 
         private void HandleDayLogic()
@@ -57,6 +60,9 @@ namespace Perspective.Utils
                     if (car)
                         car.SetActive(false);
             }
+
+            // ✅ Use cached interactor
+            _interactor?.DisableInteractor();
 
             switch (currentDay)
             {
@@ -112,6 +118,9 @@ namespace Perspective.Utils
             player.SetActive(true);
             spawner.StartSpawner();
             inputReader.EnableGameplayInput();
+
+            // ✅ Use cached interactor
+            _interactor?.EnableInteractor();
         }
 
         public void TransitionNextDay()
@@ -126,8 +135,12 @@ namespace Perspective.Utils
                 cameraHolder.SetActive(false);
                 player.SetActive(false);
                 inputReader.EnableUIInput();
-                PlayTimeline("Day5/TL_Day5");
-                // PlayTimeline("Day5/TL_Day5pt2");
+
+                // ✅ Use cached interactor
+                _interactor?.DisableInteractor();
+
+                if (DataManager.Instance.GetReputation() > 0) PlayTimeline("Day5/TL_Day5");
+                else if (DataManager.Instance.GetReputation() < 0) PlayTimeline("Day5/TL_Day5pt2");
             }
             else
             {

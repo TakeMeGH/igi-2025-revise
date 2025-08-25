@@ -49,7 +49,6 @@ namespace Perspective.Simulation
                 return;
             }
 
-            Debug.Log(daySpawnTables.Length + " COUNT");
             activeSpawnTable = daySpawnTables[day - 1];
 
             if (!activeSpawnTable)

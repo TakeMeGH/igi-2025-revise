@@ -9,10 +9,14 @@ namespace Perspective.Interactions.Core
     public class Interactor : MonoBehaviour
     {
         [Header("Dependencies")]
-        [FormerlySerializedAs("_inputReader")] [SerializeField]  private InputReader inputReader;
+        [FormerlySerializedAs("_inputReader")]
+        [SerializeField]
+        private InputReader inputReader;
+
         [FormerlySerializedAs("_interactionEvent")] [SerializeField] private InteractionEvent interactionEvent;
         private readonly List<IInteractable> _potentialInteractions = new List<IInteractable>();
         private IInteractable _closestInteractable;
+
         private void OnEnable()
         {
             if (inputReader)
@@ -20,6 +24,7 @@ namespace Perspective.Interactions.Core
                 inputReader.InteractEvent += OnInteractionButtonPress;
             }
         }
+
         private void OnDisable()
         {
             if (inputReader)
@@ -33,6 +38,7 @@ namespace Perspective.Interactions.Core
             FindClosestInteractable();
             UpdateInteractionEvent();
         }
+
         public void OnTriggerChangeDetected(bool entered, IInteractable interactable)
         {
             if (entered)
@@ -74,10 +80,12 @@ namespace Perspective.Interactions.Core
 
         private void UpdateInteractionEvent()
         {
-            if (_closestInteractable == null) {
+            if (_closestInteractable == null)
+            {
                 interactionEvent.RaiseEvent(false, "");
                 return;
             }
+
             interactionEvent.RaiseEvent(true, _closestInteractable.InteractionPrompt);
         }
 
@@ -97,6 +105,7 @@ namespace Perspective.Interactions.Core
                 {
                     _closestInteractable = null;
                 }
+
                 _potentialInteractions.Remove(interactable);
             }
         }
@@ -108,5 +117,23 @@ namespace Perspective.Interactions.Core
                 _closestInteractable.Interact();
             }
         }
+
+        public void DisableInteractor()
+        {
+            if (interactionEvent)
+            {
+                interactionEvent.RaiseEvent(false, "");
+            }
+
+            _potentialInteractions.Clear();
+            _closestInteractable = null;
+
+            enabled = false;
+        }
+        public void EnableInteractor()
+        {
+            enabled = true;
+        }
+
     }
 }

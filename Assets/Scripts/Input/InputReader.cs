@@ -27,8 +27,7 @@ namespace Perspective.Input
         public Action CloseUploadEvent;
 
         #endregion
-
-
+        
         private MCInput _mcInput;
         private bool isEnableGameplayBefore;
         private bool isEnableGameplayNow;
@@ -74,6 +73,7 @@ namespace Perspective.Input
 
         public void EnableInputBefore()
         {
+            Debug.Log(isEnableGameplayBefore);
             if(isEnableGameplayBefore) EnableGameplayInput();
             else EnableUIInput();
         }

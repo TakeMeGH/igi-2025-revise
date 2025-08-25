@@ -28,7 +28,7 @@ namespace Perspective.Utils
         public int GetReputation()
         {
             if (reputation > 5) return 1;
-            else return -1;
+            return -1;
         }
     }
 }

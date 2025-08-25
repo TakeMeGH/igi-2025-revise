@@ -1,6 +1,8 @@
 using System;
 using Perspective.Input;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Perspective.UI
 {
@@ -8,6 +10,12 @@ namespace Perspective.UI
     {
         [SerializeField] private InputReader inputReader;
         [SerializeField] private CanvasGroup canvasGroup;
+        [FormerlySerializedAs("PauseImage")] [SerializeField] private Image pauseImage;
+        [SerializeField] private Button pauseButton;
+        [SerializeField] private Sprite defaultPause;
+        [SerializeField] private Sprite internetConnectionPause;
+
+        private bool pauseConditions = false;
 
         private void OnEnable()
         {
@@ -23,22 +31,28 @@ namespace Perspective.UI
 
         private void OnPause()
         {
-            SetPause(true);
+            SetPause(!pauseConditions);
         }
 
         private void OnUnPause()
         {
-            SetPause(false);
+            if (pauseImage.sprite == internetConnectionPause) return;
+            SetPause(!pauseConditions);
         }
 
         public void SetPause(bool pause)
         {
+            pauseConditions = pause;
             if (!pause)
             {
                 Time.timeScale = 1;
                 inputReader.EnableInputBefore();
+                pauseImage.sprite = defaultPause;
+
+                pauseButton.gameObject.SetActive(true);
+                pauseImage.SetNativeSize();
             }
-            
+
             canvasGroup.alpha = pause ? 1 : 0;
             canvasGroup.blocksRaycasts = pause;
             canvasGroup.interactable = pause;
@@ -48,6 +62,14 @@ namespace Perspective.UI
                 Time.timeScale = 0f;
                 inputReader.EnableUIInput();
             }
+        }
+
+        public void PauseInternetConnections()
+        {
+            pauseImage.sprite = internetConnectionPause;
+            pauseImage.SetNativeSize();
+            pauseButton.gameObject.SetActive(false);
+            SetPause(true);
         }
 
         public void GoToMainMenu()

@@ -36,7 +36,7 @@ namespace Perspective.Utils
             var pauseController = FindAnyObjectByType<PauseMenuController>();
             if (pauseController)
             {
-                pauseController.SetPause(true);
+                pauseController.PauseInternetConnections();
             }
 
             Debug.Log("⏸ Game paused. Waiting for internet...");
